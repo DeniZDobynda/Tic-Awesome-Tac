@@ -8,24 +8,34 @@
 
 /* Begin PBXBuildFile section */
 		22BC7C6B1E791312004D5551 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BC7C6A1E791312004D5551 /* AppDelegate.swift */; };
-		22BC7C6D1E791312004D5551 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BC7C6C1E791312004D5551 /* ViewController.swift */; };
+		22BC7C6D1E791312004D5551 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BC7C6C1E791312004D5551 /* GameViewController.swift */; };
 		22BC7C701E791312004D5551 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22BC7C6E1E791312004D5551 /* Main.storyboard */; };
 		22BC7C731E791312004D5551 /* Tic_Awesome_Tac.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22BC7C711E791312004D5551 /* Tic_Awesome_Tac.xcdatamodeld */; };
 		22BC7C751E791312004D5551 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BC7C741E791312004D5551 /* Assets.xcassets */; };
 		22BC7C781E791312004D5551 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22BC7C761E791312004D5551 /* LaunchScreen.storyboard */; };
-		22BC7C801E791349004D5551 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BC7C7F1E791348004D5551 /* model.swift */; };
+		22BC7C801E791349004D5551 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BC7C7F1E791348004D5551 /* Model.swift */; };
+		22BC7C891E798109004D5551 /* dash_left_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 22BC7C871E798109004D5551 /* dash_left_black.png */; };
+		22BC7C8A1E798109004D5551 /* dash_right_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 22BC7C881E798109004D5551 /* dash_right_black.png */; };
+		22BC7C8E1E79829D004D5551 /* dash_left_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 22BC7C8C1E79829D004D5551 /* dash_left_gray.png */; };
+		22BC7C8F1E79829D004D5551 /* dash_right_gray.png in Resources */ = {isa = PBXBuildFile; fileRef = 22BC7C8D1E79829D004D5551 /* dash_right_gray.png */; };
+		22BC7C911E79A3B7004D5551 /* cross.png in Resources */ = {isa = PBXBuildFile; fileRef = 22BC7C901E79A3B7004D5551 /* cross.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		22BC7C671E791311004D5551 /* Tic Awesome Tac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tic Awesome Tac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BC7C6A1E791312004D5551 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		22BC7C6C1E791312004D5551 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		22BC7C6C1E791312004D5551 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
 		22BC7C6F1E791312004D5551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		22BC7C721E791312004D5551 /* Tic_Awesome_Tac.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Tic_Awesome_Tac.xcdatamodel; sourceTree = "<group>"; };
 		22BC7C741E791312004D5551 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22BC7C771E791312004D5551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22BC7C791E791312004D5551 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		22BC7C7F1E791348004D5551 /* model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = model.swift; sourceTree = "<group>"; };
+		22BC7C7F1E791348004D5551 /* Model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		22BC7C871E798109004D5551 /* dash_left_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dash_left_black.png; path = "Tic Awesome Tac/Images/dash_left_black.png"; sourceTree = "<group>"; };
+		22BC7C881E798109004D5551 /* dash_right_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dash_right_black.png; path = "Tic Awesome Tac/Images/dash_right_black.png"; sourceTree = "<group>"; };
+		22BC7C8C1E79829D004D5551 /* dash_left_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dash_left_gray.png; path = "Tic Awesome Tac/Images/dash_left_gray.png"; sourceTree = "<group>"; };
+		22BC7C8D1E79829D004D5551 /* dash_right_gray.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dash_right_gray.png; path = "Tic Awesome Tac/Images/dash_right_gray.png"; sourceTree = "<group>"; };
+		22BC7C901E79A3B7004D5551 /* cross.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = cross.png; path = "Tic Awesome Tac/Images/cross.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +52,7 @@
 		22BC7C5E1E791311004D5551 = {
 			isa = PBXGroup;
 			children = (
+				22BC7C8B1E79811A004D5551 /* Images */,
 				22BC7C691E791311004D5551 /* Tic Awesome Tac */,
 				22BC7C681E791311004D5551 /* Products */,
 			);
@@ -59,15 +70,27 @@
 			isa = PBXGroup;
 			children = (
 				22BC7C6A1E791312004D5551 /* AppDelegate.swift */,
-				22BC7C6C1E791312004D5551 /* ViewController.swift */,
+				22BC7C6C1E791312004D5551 /* GameViewController.swift */,
 				22BC7C6E1E791312004D5551 /* Main.storyboard */,
 				22BC7C741E791312004D5551 /* Assets.xcassets */,
 				22BC7C761E791312004D5551 /* LaunchScreen.storyboard */,
 				22BC7C791E791312004D5551 /* Info.plist */,
 				22BC7C711E791312004D5551 /* Tic_Awesome_Tac.xcdatamodeld */,
-				22BC7C7F1E791348004D5551 /* model.swift */,
+				22BC7C7F1E791348004D5551 /* Model.swift */,
 			);
 			path = "Tic Awesome Tac";
+			sourceTree = "<group>";
+		};
+		22BC7C8B1E79811A004D5551 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				22BC7C8C1E79829D004D5551 /* dash_left_gray.png */,
+				22BC7C8D1E79829D004D5551 /* dash_right_gray.png */,
+				22BC7C871E798109004D5551 /* dash_left_black.png */,
+				22BC7C881E798109004D5551 /* dash_right_black.png */,
+				22BC7C901E79A3B7004D5551 /* cross.png */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -130,8 +153,13 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				22BC7C891E798109004D5551 /* dash_left_black.png in Resources */,
 				22BC7C781E791312004D5551 /* LaunchScreen.storyboard in Resources */,
 				22BC7C751E791312004D5551 /* Assets.xcassets in Resources */,
+				22BC7C8E1E79829D004D5551 /* dash_left_gray.png in Resources */,
+				22BC7C8A1E798109004D5551 /* dash_right_black.png in Resources */,
+				22BC7C8F1E79829D004D5551 /* dash_right_gray.png in Resources */,
+				22BC7C911E79A3B7004D5551 /* cross.png in Resources */,
 				22BC7C701E791312004D5551 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -143,10 +171,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22BC7C6D1E791312004D5551 /* ViewController.swift in Sources */,
+				22BC7C6D1E791312004D5551 /* GameViewController.swift in Sources */,
 				22BC7C6B1E791312004D5551 /* AppDelegate.swift in Sources */,
 				22BC7C731E791312004D5551 /* Tic_Awesome_Tac.xcdatamodeld in Sources */,
-				22BC7C801E791349004D5551 /* model.swift in Sources */,
+				22BC7C801E791349004D5551 /* Model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
