@@ -7,39 +7,9 @@
 //
 
 import UIKit
-import CoreData
 
 class GameViewController: UIViewController {
 
-    var db: [NSManagedObject] = []
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        //1
-        guard let appDelegate =
-            UIApplication.shared.delegate as? AppDelegate else {
-                return
-        }
-
-        let managedContext =
-            appDelegate.persistentContainer.viewContext
-
-        //2
-        let fetchRequest =
-            NSFetchRequest<NSManagedObject>(entityName: "Matrix")
-
-        //3
-        do {
-            db = try managedContext.fetch(fetchRequest)
-            if ( db.count == 0 ) {
-                let entity = NSEntityDescription.entity(forEntityName: "Matrix", in: managedContext)!
-                db.append(NSManagedObject(entity: entity, insertInto: managedContext))
-            }
-        } catch let error as NSError {
-            print("Could not fetch. \(error), \(error.userInfo)")
-        }
-    }
 
     private var buttons = [[UIButton]]()
 
@@ -48,11 +18,8 @@ class GameViewController: UIViewController {
     private var winner: UIButton = UIButton()
 
     override func viewDidLoad() {
-        game = Game(size: 4)
+        game = Game(size: 9)
         //game.load()
-
-
-
 
 
         let size = game.size * 2
@@ -106,7 +73,7 @@ class GameViewController: UIViewController {
 
     func winner(button: UIButton) {
         view.subviews.forEach({ $0.removeFromSuperview() })
-        game = Game(size: 3)
+        game = Game(size: 5)
         winner = UIButton()
         self.viewDidLoad()
     }
@@ -123,92 +90,199 @@ class GameViewController: UIViewController {
         let size = game.size * 2
 
         let response = game.move(i: i, j: j, id: 1)
+        
+        if ( response != nil ) {
 
-        let array = response!.components(separatedBy: "^")
+            let array = response!.components(separatedBy: "^")
 
-        if ( array[1] == "1" ) {
-            //win!
-            winner = UIButton(frame: CGRect(x: 0 , y: 0 , width: view.bounds.maxX, height: view.bounds.maxY))
-            let image = UIImage(named: "cross.png")
-            winner.setBackgroundImage(image, for: .normal)
-            winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
-            self.view.addSubview(winner)
+            if ( array[1] == "1" ) {
+                //win!
+                winner = UIButton(frame: CGRect(x: 0 , y: 0 , width: view.bounds.maxX, height: view.bounds.maxY))
+                let image = UIImage(named: "cross.png")
+                winner.setBackgroundImage(image, for: .normal)
+                winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
+                self.view.addSubview(winner)
 
-        } else if ( array[1] == "-1" ) {
-            //loss
-            winner = UIButton(frame: CGRect(x: 0 , y: 0 , width: view.bounds.maxX, height: view.bounds.maxY))
-            let image = UIImage(named: "cross.png")
-            winner.setBackgroundImage(image, for: .normal)
-            winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
-            self.view.addSubview(winner)
+            } else if ( array[1] == "-1" ) {
+                //loss
+                winner = UIButton(frame: CGRect(x: 0 , y: 0 , width: view.bounds.maxX, height: view.bounds.maxY))
+                let image = UIImage(named: "circle.png")
+                winner.setBackgroundImage(image, for: .normal)
+                winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
+                self.view.addSubview(winner)
 
-        }
-        if ( array[0] != "") {
-
-            let string = array[0].components(separatedBy: "|")
-
-            var k = 0
-            while ( k < string.count ) {
-                let size = game.size * 2
-
-                let b = view.bounds.maxX > view.bounds.maxY ? view.bounds.maxY : view.bounds.maxX
-
-                let measure = (Int(b)-20) / size
-
-                let x = Int(view.bounds.midX) - measure*game.size
-                let y = Int(view.bounds.midY) - measure*game.size
-
-
-                let situation = string[k].components(separatedBy: "-")[0]
-                switch situation {
-                case "1", "3":
-                    let button = UIButton(frame: CGRect(x: x + j*measure - measure, y: y + i*measure - measure, width: measure*2, height: measure*2))
-                    let image = UIImage(named: "cross.png")
-                    button.setBackgroundImage(image, for: .normal)
-                    self.view.addSubview(button)
-
-                case "2", "4":
-                    let button = UIButton(frame: CGRect(x: x + j*measure , y: y + i*measure , width: measure*2, height: measure*2))
-                    let image = UIImage(named: "cross.png")
-                    button.setBackgroundImage(image, for: .normal)
-                    self.view.addSubview(button)
-
-                case "5", "7":
-                    let button = UIButton(frame: CGRect(x: x + j*measure , y: y + i*measure - measure, width: measure*2, height: measure*2))
-                    let image = UIImage(named: "cross.png")
-                    button.setBackgroundImage(image, for: .normal)
-                    self.view.addSubview(button)
-
-                case "6", "8":
-                    let button = UIButton(frame: CGRect(x: x + j*measure - measure , y: y + i*measure , width: measure*2, height: measure*2))
-                    let image = UIImage(named: "cross.png")
-                    button.setBackgroundImage(image, for: .normal)
-                    self.view.addSubview(button)
-
-                default:
-                    print(situation)
-                }
-                k+=1
             }
+            if ( array[0] != "") {
 
-            if ( (i+j) % 2 == 0 ) {
-                //right
-                if ( i == 0 || j == 0 || i == size-1 || j == size-1) {
-                    buttons[i][j].setImage(right_b, for: .normal)
-                } else {
-                    buttons[i][j].setImage(right_b, for: .normal)
+                let string = array[0].components(separatedBy: "|")
+
+                var k = 0
+                while ( k < string.count ) {
+                    let size = game.size * 2
+
+                    let b = view.bounds.maxX > view.bounds.maxY ? view.bounds.maxY : view.bounds.maxX
+
+                    let measure = (Int(b)-20) / size
+
+                    let x = Int(view.bounds.midX) - measure*game.size
+                    let y = Int(view.bounds.midY) - measure*game.size
+
+
+                    let situation = string[k].components(separatedBy: "-")[0]
+                    switch situation {
+                    case "1", "3":
+                        let button = UIButton(frame: CGRect(x: x + j*measure - measure, y: y + i*measure - measure, width: measure*2, height: measure*2))
+                        let image = UIImage(named: "cross.png")
+                        button.setBackgroundImage(image, for: .normal)
+                        self.view.addSubview(button)
+
+                    case "2", "4":
+                        let button = UIButton(frame: CGRect(x: x + j*measure , y: y + i*measure , width: measure*2, height: measure*2))
+                        let image = UIImage(named: "cross.png")
+                        button.setBackgroundImage(image, for: .normal)
+                        self.view.addSubview(button)
+
+                    case "5", "7":
+                        let button = UIButton(frame: CGRect(x: x + j*measure , y: y + i*measure - measure, width: measure*2, height: measure*2))
+                        let image = UIImage(named: "cross.png")
+                        button.setBackgroundImage(image, for: .normal)
+                        self.view.addSubview(button)
+
+                    case "6", "8":
+                        let button = UIButton(frame: CGRect(x: x + j*measure - measure , y: y + i*measure , width: measure*2, height: measure*2))
+                        let image = UIImage(named: "cross.png")
+                        button.setBackgroundImage(image, for: .normal)
+                        self.view.addSubview(button)
+
+                    default:
+                        print(situation)
+                    }
+                    k+=1
                 }
             } else {
-                //left
-                if ( i == 0 || j == 0 || i == size-1 || j == size-1) {
-                    buttons[i][j].setImage(left_b, for: .normal)
-                } else {
-                    buttons[i][j].setImage(left_b, for: .normal)
+                //move is not worthy
+                repeat {
+                    let iRespond = game.makeBestMove()
+
+                    if ( iRespond != nil ) {
+
+                        let array = iRespond!.components(separatedBy: "^")
+
+                        let coordinates = array[2].components(separatedBy: ":")
+                        let ii = Int(coordinates[0]) ?? 0
+                        let jj = Int(coordinates[1]) ?? 0
+
+                        if ( array[1] == "-1" ) {
+                            //win!
+                            winner = UIButton(frame: CGRect(x: 0 , y: 0 , width: view.bounds.maxX, height: view.bounds.maxY))
+                            let image = UIImage(named: "cross.png")
+                            winner.setBackgroundImage(image, for: .normal)
+                            winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
+                            self.view.addSubview(winner)
+
+                        } else if ( array[1] == "1" ) {
+                            //loss
+                            winner = UIButton(frame: CGRect(x: 0 , y: 0 , width: view.bounds.maxX, height: view.bounds.maxY))
+                            let image = UIImage(named: "circle.png")
+                            winner.setBackgroundImage(image, for: .normal)
+                            winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
+                            self.view.addSubview(winner)
+
+                        }
+                        if ( array[0] != "") {
+
+                            let string = array[0].components(separatedBy: "|")
+
+
+
+                            var k = 0
+                            while ( k < string.count && string[k] != "" ) {
+                                let size = game.size * 2
+
+                                let b = view.bounds.maxX > view.bounds.maxY ? view.bounds.maxY : view.bounds.maxX
+
+                                let measure = (Int(b)-20) / size
+
+                                let x = Int(view.bounds.midX) - measure*game.size
+                                let y = Int(view.bounds.midY) - measure*game.size
+
+
+                                let situation = string[k].components(separatedBy: "-")[0]
+                                switch situation {
+                                case "1", "3":
+                                    let button = UIButton(frame: CGRect(x: x + jj*measure - measure, y: y + ii*measure - measure, width: measure*2, height: measure*2))
+                                    let image = UIImage(named: "circle.png")
+                                    button.setBackgroundImage(image, for: .normal)
+                                    self.view.addSubview(button)
+
+                                case "2", "4":
+                                    let button = UIButton(frame: CGRect(x: x + jj*measure , y: y + ii*measure , width: measure*2, height: measure*2))
+                                    let image = UIImage(named: "circle.png")
+                                    button.setBackgroundImage(image, for: .normal)
+                                    self.view.addSubview(button)
+
+                                case "5", "7":
+                                    let button = UIButton(frame: CGRect(x: x + jj*measure , y: y + ii*measure - measure, width: measure*2, height: measure*2))
+                                    let image = UIImage(named: "circle.png")
+                                    button.setBackgroundImage(image, for: .normal)
+                                    self.view.addSubview(button)
+                                    
+                                case "6", "8":
+                                    let button = UIButton(frame: CGRect(x: x + jj*measure - measure , y: y + ii*measure , width: measure*2, height: measure*2))
+                                    let image = UIImage(named: "circle.png")
+                                    button.setBackgroundImage(image, for: .normal)
+                                    self.view.addSubview(button)
+                                    
+                                default:
+                                    print(situation)
+                                }
+                                k+=1
+                            }
+                        }
+
+
+                        if ( (ii+jj) % 2 == 0 ) {
+                            //right
+                            if ( ii == 0 || jj == 0 || ii == size-1 || jj == size-1) {
+                                buttons[ii][jj].setImage(right_b, for: .normal)
+                            } else {
+                                buttons[ii][jj].setImage(right_b, for: .normal)
+                            }
+                        } else {
+                            //left
+                            if ( ii == 0 || jj == 0 || ii == size-1 || jj == size-1) {
+                                buttons[ii][jj].setImage(left_b, for: .normal)
+                            } else {
+                                buttons[ii][jj].setImage(left_b, for: .normal)
+                            }
+                        }
+
+                    }
+
                 }
+                while(!game.move)
             }
-            //game.store(db:db)
-            //game.load(db:db)
+
+                if ( (i+j) % 2 == 0 ) {
+                    //right
+                    if ( i == 0 || j == 0 || i == size-1 || j == size-1) {
+                        buttons[i][j].setImage(right_b, for: .normal)
+                    } else {
+                        buttons[i][j].setImage(right_b, for: .normal)
+                    }
+                } else {
+                    //left
+                    if ( i == 0 || j == 0 || i == size-1 || j == size-1) {
+                        buttons[i][j].setImage(left_b, for: .normal)
+                    } else {
+                        buttons[i][j].setImage(left_b, for: .normal)
+                    }
+                }
+                //game.store(db:db)
+                //game.load(db:db)
+
         }
+
     }
 
 }

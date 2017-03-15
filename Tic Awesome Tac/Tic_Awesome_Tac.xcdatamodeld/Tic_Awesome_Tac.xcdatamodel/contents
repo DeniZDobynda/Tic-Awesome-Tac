@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="11759" systemVersion="16D32" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="Matrix" representedClassName="Matrix" syncable="YES" codeGenerationType="class">
+    <entity name="Matrixx" representedClassName="Matrixx" syncable="YES" codeGenerationType="class">
         <attribute name="dash" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="fields" optional="YES" attributeType="Transformable" syncable="YES"/>
         <attribute name="fields_small" optional="YES" attributeType="Transformable" syncable="YES"/>
@@ -8,6 +8,6 @@
         <attribute name="size" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Matrix" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Matrixx" positionX="-63" positionY="-18" width="128" height="118"/>
     </elements>
 </model>
