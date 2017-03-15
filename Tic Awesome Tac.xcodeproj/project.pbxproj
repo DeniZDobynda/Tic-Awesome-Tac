@@ -13,6 +13,7 @@
 		22BC7C731E791312004D5551 /* Tic_Awesome_Tac.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 22BC7C711E791312004D5551 /* Tic_Awesome_Tac.xcdatamodeld */; };
 		22BC7C751E791312004D5551 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 22BC7C741E791312004D5551 /* Assets.xcassets */; };
 		22BC7C781E791312004D5551 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22BC7C761E791312004D5551 /* LaunchScreen.storyboard */; };
+		22BC7C801E791349004D5551 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BC7C7F1E791348004D5551 /* model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		22BC7C741E791312004D5551 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		22BC7C771E791312004D5551 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		22BC7C791E791312004D5551 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		22BC7C7F1E791348004D5551 /* model.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = model.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				22BC7C761E791312004D5551 /* LaunchScreen.storyboard */,
 				22BC7C791E791312004D5551 /* Info.plist */,
 				22BC7C711E791312004D5551 /* Tic_Awesome_Tac.xcdatamodeld */,
+				22BC7C7F1E791348004D5551 /* model.swift */,
 			);
 			path = "Tic Awesome Tac";
 			sourceTree = "<group>";
@@ -143,6 +146,7 @@
 				22BC7C6D1E791312004D5551 /* ViewController.swift in Sources */,
 				22BC7C6B1E791312004D5551 /* AppDelegate.swift in Sources */,
 				22BC7C731E791312004D5551 /* Tic_Awesome_Tac.xcdatamodeld in Sources */,
+				22BC7C801E791349004D5551 /* model.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
