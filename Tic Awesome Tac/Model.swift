@@ -65,7 +65,7 @@ class Matrix {
         return (0,0)
     }
 
-    private func check(i: Int, j: Int, id: Int) -> String {
+    public func check(i: Int, j: Int, id: Int) -> String {
         var result: String = ""
         if ( (i+j) % 2 == 0){
             // '/' variant
@@ -135,6 +135,53 @@ class Matrix {
 
         }
         return result + "^" + String(didWon(id: id))
+    }
+
+    public func checkForIdleMove(i: Int, j: Int) -> Bool {
+        if ( dash[i][j] != 0) {
+            return false
+        }
+        if ( (i+j) % 2 == 0){
+            // '/' variant
+
+            if ( i % 2 == 1) {
+                // 'main/sub' case
+                if ( ((dash[i][j-1] == 0 && dash[i-1][j] == 0) || (dash[i-1][j] == 0 && dash[i-1][j-1] == 0) || (dash[i][j-1] == 0 && dash[i-1][j-1] == 0)) && ((dash[i][j-1] == 0 && dash[i+1][j] == 0) || (dash[i+1][j] == 0 && dash[i+1][j+1] == 0) || (dash[i][j+1] == 0 && dash[i+1][j+1] == 0) )) {
+                    if ( fields[i/2][j/2] == 0 && fields_small[i/2][j/2] == 0 ) {
+                        return true
+                    }
+                }
+
+            } else {
+                // 'sub/main' case
+                if ( ((dash[i][j-1] == 0 && dash[i-1][j] == 0) || (dash[i-1][j] == 0 && dash[i-1][j-1] == 0) || (dash[i][j-1] == 0 && dash[i-1][j-1] == 0) ) && ( (dash[i][j+1] == 0 && dash[i+1][j] == 0) || (dash[i+1][j] == 0 && dash[i+1][j+1] == 0) || (dash[i][j+1] == 0 && dash[i+1][j+1] == 0) )) {
+                    if ( fields_small[i/2-1][j/2-1] == 0 && fields[i/2][j/2] == 0) {
+                        return true
+                    }
+                }
+            }
+
+        } else {
+            // '\' variant
+
+            if ( i % 2 == 1) {
+                // 'sub\main' case
+                if (( (dash[i][j+1] == 0 && dash[i-1][j] == 0) || (dash[i-1][j] == 0 && dash[i-1][j+1] == 0) || (dash[i][j+1] == 0 && dash[i-1][j+1] == 0) ) && ( (dash[i][j-1] == 0 && dash[i+1][j] == 0) || (dash[i+1][j] == 0 && dash[i+1][j-1] == 0) || (dash[i][j-1] == 0 && dash[i+1][j-1] == 0) )) {
+                    if ( fields[i/2][j/2] == 0 && fields_small[i/2][j/2-1] == 0  ) {
+                        return true
+                    }
+                }
+            } else {
+                // 'main\sub' case
+                if (( (dash[i][j+1] == 0 && dash[i-1][j] == 0) || (dash[i-1][j] == 0 && dash[i-1][j+1] == 0) || (dash[i][j+1] == 0 && dash[i-1][j+1] == 0) ) && ( (dash[i][j-1] == 0 && dash[i+1][j] == 0) || (dash[i+1][j] == 0 && dash[i+1][j-1] == 0) || (dash[i][j-1] == 0 && dash[i+1][j-1] == 0) )) {
+                    if ( fields_small[i/2-1][j/2] == 0 && fields[i/2][j/2] == 0 ) {
+                        return true
+                    }
+                }
+            }
+            
+        }
+        return false
     }
 
     private func didWon(id: Int) -> Int {
@@ -212,6 +259,31 @@ class Game {
     public func makeBestMove() -> String? {
         var i = 0
         var j = 0
+/////////////////let's create something special)
+        var pending = [(Int, Int)]()
+        for i in 1..<size*2-1 {
+            for j in 1..<size*2-1 {
+                let answer = matrix!.check(i: i, j: j, id: 0)
+                let option = answer.components(separatedBy: "^")[0]
+                if ( option == "") {
+                    pending.append((i,j))
+                } else {
+                    return (move(i: i, j: j, id: 2) ?? "^") + "^\(i):\(j)"
+                }
+
+            }
+        }
+        //////////////check all pendings for reason of loosing?
+        for (i,j) in pending {
+            if ( matrix!.checkForIdleMove(i: i, j: j)) {
+                return (move(i: i, j: j, id: 2) ?? "^") + "^\(i):\(j)"
+            }
+        }
+        /////////////////here, maybe, I will write some intelligence in case of tunnels
+        ///////////////////but not now)
+
+        i = 0
+        j = 0
         var count = 0
         repeat{
             i = Int(arc4random_uniform(UInt32(size*2 - 2))) + 1
