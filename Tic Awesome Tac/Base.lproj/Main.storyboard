@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zsH-Gj-Aes">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -27,5 +28,74 @@
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="137.18140929535232"/>
         </scene>
+        <!--Menu View Controller-->
+        <scene sceneID="dJk-To-2ix">
+            <objects>
+                <viewController id="zsH-Gj-Aes" customClass="MenuViewController" customModule="Tic_Awesome_Tac" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="n1v-od-UVj"/>
+                        <viewControllerLayoutGuide type="bottom" id="caV-gd-yKa"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2Od-XQ-F7S">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="chH-7A-w9X">
+                                <rect key="frame" x="26" y="28" width="323" height="631"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhh-96-avc">
+                                        <rect key="frame" x="0.0" y="0.0" width="323" height="150.5"/>
+                                        <state key="normal" image="3x3.png"/>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" identifier="Show 3" id="VuI-WJ-1i1"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M44-93-TyG">
+                                        <rect key="frame" x="0.0" y="160.5" width="323" height="150"/>
+                                        <state key="normal" image="6x6.png"/>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" identifier="Show 6" id="jmV-LR-DGb"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9v0-0f-4qu">
+                                        <rect key="frame" x="0.0" y="320.5" width="323" height="150.5"/>
+                                        <state key="normal" image="9x9.png"/>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" identifier="Show 9" id="gz2-CZ-Q3K"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6RY-8M-ipa">
+                                        <rect key="frame" x="0.0" y="481" width="323" height="150"/>
+                                        <state key="normal" image="12x12.png"/>
+                                        <connections>
+                                            <segue destination="BYZ-38-t0r" kind="show" identifier="Show 12" id="K8d-w4-0Ye"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="0.065595202147960663" green="0.020601380616426468" blue="0.98557943105697632" alpha="0.37216395547945208" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="chH-7A-w9X" secondAttribute="trailing" constant="10" id="7p0-hj-dYv"/>
+                            <constraint firstItem="caV-gd-yKa" firstAttribute="top" secondItem="chH-7A-w9X" secondAttribute="bottom" constant="8" symbolic="YES" id="dMA-B7-frl"/>
+                            <constraint firstItem="chH-7A-w9X" firstAttribute="top" secondItem="n1v-od-UVj" secondAttribute="bottom" constant="8" symbolic="YES" id="qDL-Yd-G8r"/>
+                            <constraint firstItem="chH-7A-w9X" firstAttribute="leading" secondItem="2Od-XQ-F7S" secondAttribute="leadingMargin" constant="10" id="wVY-oq-Dbu"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7On-SL-g57" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-650.39999999999998" y="136.28185907046478"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="12x12.png" width="534" height="309"/>
+        <image name="3x3.png" width="534" height="315"/>
+        <image name="6x6.png" width="534" height="315"/>
+        <image name="9x9.png" width="534" height="315"/>
+    </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="VuI-WJ-1i1"/>
+    </inferredMetricsTieBreakers>
 </document>

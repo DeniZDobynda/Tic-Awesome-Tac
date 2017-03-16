@@ -15,12 +15,14 @@ class GameViewController: UIViewController {
 
     private var game = Game(size: 1)
 
+    public var n: Int?
+
     private var winner: UIButton = UIButton()
+    private var exit: UIButton = UIButton()
 
     override func viewDidLoad() {
-        game = Game(size: 4)
+        game = Game(size: n!)
         //game.load()
-
 
         let size = game.size * 2
 
@@ -71,11 +73,24 @@ class GameViewController: UIViewController {
             }
         }
 
+        exit = UIButton(frame: CGRect(x: x-measure, y: y, width: measure, height: measure))
+        exit.setImage(UIImage(named: "home.jpg"), for: .normal)
+        exit.addTarget(self, action: #selector(close(button:)), for: .touchUpInside)
+
+        self.view.addSubview(exit)
+
+
+    }
+
+    func close(button: UIButton) {
+        navigationController?.popViewController(animated: true)
+
+        dismiss(animated: true, completion: nil)
     }
 
     func winner(button: UIButton) {
         view.subviews.forEach({ $0.removeFromSuperview() })
-        game = Game(size: 4)
+        game = Game(size: n!)
         winner = UIButton()
         self.viewDidLoad()
     }
