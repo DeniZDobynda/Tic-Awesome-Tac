@@ -18,7 +18,7 @@ class GameViewController: UIViewController {
     private var winner: UIButton = UIButton()
 
     override func viewDidLoad() {
-        game = Game(size: 9)
+        game = Game(size: 4)
         //game.load()
 
 
@@ -53,6 +53,7 @@ class GameViewController: UIViewController {
                         buttons[i][j].setImage(right_b, for: .normal)
                     } else {
                         buttons[i][j].setImage(right, for: .normal)
+                        buttons[i][j].addTarget(self, action: #selector(pressButton(button:)), for: .touchUpInside)
                     }
                 } else {
                     //left
@@ -60,10 +61,11 @@ class GameViewController: UIViewController {
                         buttons[i][j].setImage(left_b, for: .normal)
                     } else {
                         buttons[i][j].setImage(left, for: .normal)
+                        buttons[i][j].addTarget(self, action: #selector(pressButton(button:)), for: .touchUpInside)
                     }
                 }
 
-                buttons[i][j].addTarget(self, action: #selector(pressButton(button:)), for: .touchUpInside)
+
 
                 self.view.addSubview(buttons[i][j])
             }
@@ -73,7 +75,7 @@ class GameViewController: UIViewController {
 
     func winner(button: UIButton) {
         view.subviews.forEach({ $0.removeFromSuperview() })
-        game = Game(size: 5)
+        game = Game(size: 4)
         winner = UIButton()
         self.viewDidLoad()
     }
@@ -87,7 +89,7 @@ class GameViewController: UIViewController {
 
         let left_b = UIImage(named: "dash_left_black.png") as UIImage?
 
-        let size = game.size * 2
+        //let size = game.size * 2
 
         let response = game.move(i: i, j: j, id: 1)
         
@@ -243,19 +245,12 @@ class GameViewController: UIViewController {
 
                         if ( (ii+jj) % 2 == 0 ) {
                             //right
-                            if ( ii == 0 || jj == 0 || ii == size-1 || jj == size-1) {
-                                buttons[ii][jj].setImage(right_b, for: .normal)
-                            } else {
-                                buttons[ii][jj].setImage(right_b, for: .normal)
-                            }
+                            buttons[ii][jj].setImage(right_b, for: .normal)
                         } else {
                             //left
-                            if ( ii == 0 || jj == 0 || ii == size-1 || jj == size-1) {
-                                buttons[ii][jj].setImage(left_b, for: .normal)
-                            } else {
-                                buttons[ii][jj].setImage(left_b, for: .normal)
-                            }
+                            buttons[ii][jj].setImage(left_b, for: .normal)
                         }
+                        buttons[ii][jj].removeTarget(nil, action: nil, for: .allEvents)
 
                     }
 
@@ -263,21 +258,13 @@ class GameViewController: UIViewController {
                 while(!game.move)
             }
 
-                if ( (i+j) % 2 == 0 ) {
-                    //right
-                    if ( i == 0 || j == 0 || i == size-1 || j == size-1) {
-                        buttons[i][j].setImage(right_b, for: .normal)
-                    } else {
-                        buttons[i][j].setImage(right_b, for: .normal)
-                    }
-                } else {
-                    //left
-                    if ( i == 0 || j == 0 || i == size-1 || j == size-1) {
-                        buttons[i][j].setImage(left_b, for: .normal)
-                    } else {
-                        buttons[i][j].setImage(left_b, for: .normal)
-                    }
-                }
+            if ( (i+j) % 2 == 0 ) {
+                //right
+                buttons[i][j].setImage(right_b, for: .normal)
+            } else {
+                buttons[i][j].setImage(left_b, for: .normal)
+            }
+            buttons[i][j].removeTarget(nil, action: nil, for: .allEvents)
                 //game.store(db:db)
                 //game.load(db:db)
 
