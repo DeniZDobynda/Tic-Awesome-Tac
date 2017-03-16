@@ -12,8 +12,20 @@ class MenuViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let value = UIInterfaceOrientation.landscapeLeft.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
 
         // Do any additional setup after loading the view.
+    }
+    override var prefersStatusBarHidden : Bool {
+        return true
+    }
+
+    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.landscapeLeft
+    }
+    private func shouldAutorotate() -> Bool {
+        return true
     }
 
     override func didReceiveMemoryWarning() {

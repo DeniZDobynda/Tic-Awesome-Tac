@@ -17,8 +17,20 @@ class GameViewController: UIViewController {
 
     public var n: Int?
 
+    private var didWon: String = "0"
+
     private var winner: UIButton = UIButton()
     private var exit: UIButton = UIButton()
+
+    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
+        return UIInterfaceOrientationMask.landscapeLeft
+    }
+    private func shouldAutorotate() -> Bool {
+        return true
+    }
+    override var prefersStatusBarHidden : Bool {
+        return true
+    }
 
     override func viewDidLoad() {
         game = Game(size: n!)
@@ -73,7 +85,8 @@ class GameViewController: UIViewController {
             }
         }
 
-        exit = UIButton(frame: CGRect(x: x-measure, y: y, width: measure, height: measure))
+        let height = x < y ? y - 20 : x - 20
+        exit = UIButton(frame: CGRect(x: 10, y: 10, width: height, height: height))
         exit.setImage(UIImage(named: "home.jpg"), for: .normal)
         exit.addTarget(self, action: #selector(close(button:)), for: .touchUpInside)
 
@@ -83,8 +96,7 @@ class GameViewController: UIViewController {
     }
 
     func close(button: UIButton) {
-        navigationController?.popViewController(animated: true)
-
+        //self.navigationController!.popViewController(animated: true)
         dismiss(animated: true, completion: nil)
     }
 
@@ -112,23 +124,15 @@ class GameViewController: UIViewController {
 
             let array = response!.components(separatedBy: "^")
 
-            if ( array[1] == "1" ) {
-                //win!
-                winner = UIButton(frame: CGRect(x: 0 , y: 0 , width: view.bounds.maxX, height: view.bounds.maxY))
-                let image = UIImage(named: "cross.png")
-                winner.setBackgroundImage(image, for: .normal)
-                winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
-                self.view.addSubview(winner)
+            ////////////////////////
+            didWon = array[1]
 
-            } else if ( array[1] == "-1" ) {
-                //loss
-                winner = UIButton(frame: CGRect(x: 0 , y: 0 , width: view.bounds.maxX, height: view.bounds.maxY))
-                let image = UIImage(named: "circle.png")
-                winner.setBackgroundImage(image, for: .normal)
-                winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
-                self.view.addSubview(winner)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+                self.check()
+            })
 
-            }
+            ////////////////////////
+
             if ( array[0] != "") {
 
                 let string = array[0].components(separatedBy: "|")
@@ -189,23 +193,22 @@ class GameViewController: UIViewController {
                         let ii = Int(coordinates[0]) ?? 0
                         let jj = Int(coordinates[1]) ?? 0
 
-                        if ( array[1] == "-1" ) {
-                            //win!
-                            winner = UIButton(frame: CGRect(x: 0 , y: 0 , width: view.bounds.maxX, height: view.bounds.maxY))
-                            let image = UIImage(named: "cross.png")
-                            winner.setBackgroundImage(image, for: .normal)
-                            winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
-                            self.view.addSubview(winner)
-
-                        } else if ( array[1] == "1" ) {
-                            //loss
-                            winner = UIButton(frame: CGRect(x: 0 , y: 0 , width: view.bounds.maxX, height: view.bounds.maxY))
-                            let image = UIImage(named: "circle.png")
-                            winner.setBackgroundImage(image, for: .normal)
-                            winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
-                            self.view.addSubview(winner)
-
+                        ////////////////////////
+                        switch array[1] {
+                        case "-1":
+                            didWon = "1"
+                        case "1":
+                            didWon = "-1"
+                        default:
+                            didWon = "0"
                         }
+
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+                            self.check()
+                        })
+
+                        /////////////////////////
+
                         if ( array[0] != "") {
 
                             let string = array[0].components(separatedBy: "|")
@@ -285,6 +288,52 @@ class GameViewController: UIViewController {
 
         }
 
+    }
+
+    private func check() {
+
+        if ( didWon == "1" ) {
+            //win!
+            view.subviews.forEach({ $0.removeFromSuperview() })
+
+            let imageView = UIImageView(frame: CGRect(x: 10 , y: 20, width: view.bounds.maxX-20, height: view.bounds.maxY/2-40))
+            imageView.image = UIImage(named: "winner.png")
+            self.view.addSubview(imageView)
+
+            winner = UIButton(frame: CGRect(x: view.bounds.maxX/2 , y: view.bounds.maxY/2, width: view.bounds.maxX/2 - 10, height: view.bounds.maxY/4 - 20))
+            winner.setBackgroundImage(UIImage(named: "again.png"), for: .normal)
+            winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
+            self.view.addSubview(winner)
+
+            let menu = UIButton(frame: CGRect(x: 10, y: view.bounds.maxY/2, width: view.bounds.maxX/2 - 10, height: view.bounds.maxY/4 - 20))
+            menu.setBackgroundImage(UIImage(named: "menu.png"), for: .normal)
+            menu.addTarget(self, action: #selector(close(button:)), for: .touchUpInside)
+            self.view.addSubview(menu)
+
+            return
+
+
+        } else if ( didWon == "-1" ) {
+            //loss
+            view.subviews.forEach({ $0.removeFromSuperview() })
+
+            let imageView = UIImageView(frame: CGRect(x: 10 , y: 20, width: view.bounds.maxX-20, height: view.bounds.maxY/2-40))
+            imageView.image = UIImage(named: "looser.png")
+            self.view.addSubview(imageView)
+
+            winner = UIButton(frame: CGRect(x: view.bounds.maxX/2 , y: view.bounds.maxY/2, width: view.bounds.maxX/2 - 10, height: view.bounds.maxY/4 - 20))
+            winner.setBackgroundImage(UIImage(named: "again.png"), for: .normal)
+            winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
+            self.view.addSubview(winner)
+
+            let menu = UIButton(frame: CGRect(x: 10, y: view.bounds.maxY/2, width: view.bounds.maxX/2 - 10, height: view.bounds.maxY/4 - 20))
+            menu.setBackgroundImage(UIImage(named: "menu.png"), for: .normal)
+            menu.addTarget(self, action: #selector(close(button:)), for: .touchUpInside)
+            self.view.addSubview(menu)
+
+            return
+
+        }
     }
 
 }

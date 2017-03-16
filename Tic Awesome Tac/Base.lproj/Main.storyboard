@@ -40,32 +40,35 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="chH-7A-w9X">
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="chH-7A-w9X">
                                 <rect key="frame" x="26" y="28" width="323" height="631"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title.png" translatesAutoresizingMaskIntoConstraints="NO" id="nua-Px-Mrh">
+                                        <rect key="frame" x="0.0" y="0.0" width="323" height="122"/>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhh-96-avc">
-                                        <rect key="frame" x="0.0" y="0.0" width="323" height="150.5"/>
+                                        <rect key="frame" x="0.0" y="127" width="323" height="122.5"/>
                                         <state key="normal" image="3x3.png"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="Show 3" id="VuI-WJ-1i1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M44-93-TyG">
-                                        <rect key="frame" x="0.0" y="160.5" width="323" height="150"/>
+                                        <rect key="frame" x="0.0" y="254.5" width="323" height="122"/>
                                         <state key="normal" image="6x6.png"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="Show 6" id="jmV-LR-DGb"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9v0-0f-4qu">
-                                        <rect key="frame" x="0.0" y="320.5" width="323" height="150.5"/>
+                                        <rect key="frame" x="0.0" y="381.5" width="323" height="122.5"/>
                                         <state key="normal" image="9x9.png"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="Show 9" id="gz2-CZ-Q3K"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6RY-8M-ipa">
-                                        <rect key="frame" x="0.0" y="481" width="323" height="150"/>
+                                        <rect key="frame" x="0.0" y="509" width="323" height="122"/>
                                         <state key="normal" image="12x12.png"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="Show 12" id="K8d-w4-0Ye"/>
@@ -90,10 +93,11 @@
         </scene>
     </scenes>
     <resources>
-        <image name="12x12.png" width="534" height="309"/>
-        <image name="3x3.png" width="534" height="315"/>
-        <image name="6x6.png" width="534" height="315"/>
-        <image name="9x9.png" width="534" height="315"/>
+        <image name="12x12.png" width="534" height="268"/>
+        <image name="3x3.png" width="534" height="268"/>
+        <image name="6x6.png" width="534" height="268"/>
+        <image name="9x9.png" width="534" height="268"/>
+        <image name="title.png" width="534" height="267"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="VuI-WJ-1i1"/>
