@@ -19,6 +19,10 @@
 		22552B241E7ADBAB00B02BA2 /* menu.png in Resources */ = {isa = PBXBuildFile; fileRef = 22552B221E7ADBAB00B02BA2 /* menu.png */; };
 		22552B271E7ADD7500B02BA2 /* looser.png in Resources */ = {isa = PBXBuildFile; fileRef = 22552B251E7ADD7500B02BA2 /* looser.png */; };
 		22552B281E7ADD7500B02BA2 /* winner.png in Resources */ = {isa = PBXBuildFile; fileRef = 22552B261E7ADD7500B02BA2 /* winner.png */; };
+		2270E6251E7BC2420089A4DD /* dash_left_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 2270E6211E7BC2420089A4DD /* dash_left_blue.png */; };
+		2270E6261E7BC2420089A4DD /* dash_left_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 2270E6221E7BC2420089A4DD /* dash_left_red.png */; };
+		2270E6271E7BC2420089A4DD /* dash_right_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 2270E6231E7BC2420089A4DD /* dash_right_blue.png */; };
+		2270E6281E7BC2420089A4DD /* dash_right_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 2270E6241E7BC2420089A4DD /* dash_right_red.png */; };
 		22BC7C6B1E791312004D5551 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BC7C6A1E791312004D5551 /* AppDelegate.swift */; };
 		22BC7C6D1E791312004D5551 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BC7C6C1E791312004D5551 /* GameViewController.swift */; };
 		22BC7C701E791312004D5551 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 22BC7C6E1E791312004D5551 /* Main.storyboard */; };
@@ -46,6 +50,10 @@
 		22552B221E7ADBAB00B02BA2 /* menu.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = menu.png; path = "Tic Awesome Tac/Images/menu.png"; sourceTree = "<group>"; };
 		22552B251E7ADD7500B02BA2 /* looser.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = looser.png; path = "Tic Awesome Tac/Images/looser.png"; sourceTree = "<group>"; };
 		22552B261E7ADD7500B02BA2 /* winner.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = winner.png; path = "Tic Awesome Tac/Images/winner.png"; sourceTree = "<group>"; };
+		2270E6211E7BC2420089A4DD /* dash_left_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dash_left_blue.png; path = "Tic Awesome Tac/Images/dash_left_blue.png"; sourceTree = "<group>"; };
+		2270E6221E7BC2420089A4DD /* dash_left_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dash_left_red.png; path = "Tic Awesome Tac/Images/dash_left_red.png"; sourceTree = "<group>"; };
+		2270E6231E7BC2420089A4DD /* dash_right_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dash_right_blue.png; path = "Tic Awesome Tac/Images/dash_right_blue.png"; sourceTree = "<group>"; };
+		2270E6241E7BC2420089A4DD /* dash_right_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dash_right_red.png; path = "Tic Awesome Tac/Images/dash_right_red.png"; sourceTree = "<group>"; };
 		22BC7C671E791311004D5551 /* Tic Awesome Tac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tic Awesome Tac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BC7C6A1E791312004D5551 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		22BC7C6C1E791312004D5551 /* GameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +117,10 @@
 		22BC7C8B1E79811A004D5551 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				2270E6211E7BC2420089A4DD /* dash_left_blue.png */,
+				2270E6221E7BC2420089A4DD /* dash_left_red.png */,
+				2270E6231E7BC2420089A4DD /* dash_right_blue.png */,
+				2270E6241E7BC2420089A4DD /* dash_right_red.png */,
 				22552B251E7ADD7500B02BA2 /* looser.png */,
 				22552B261E7ADD7500B02BA2 /* winner.png */,
 				22552B211E7ADBAB00B02BA2 /* again.png */,
@@ -189,6 +201,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2270E6281E7BC2420089A4DD /* dash_right_red.png in Resources */,
+				2270E6271E7BC2420089A4DD /* dash_right_blue.png in Resources */,
 				22552B1B1E7A9B1F00B02BA2 /* 9x9.png in Resources */,
 				22BC7C891E798109004D5551 /* dash_left_black.png in Resources */,
 				22552B241E7ADBAB00B02BA2 /* menu.png in Resources */,
@@ -203,6 +217,8 @@
 				22552B281E7ADD7500B02BA2 /* winner.png in Resources */,
 				22552B191E7A9B1F00B02BA2 /* 3x3.png in Resources */,
 				22552B1A1E7A9B1F00B02BA2 /* 6x6.png in Resources */,
+				2270E6251E7BC2420089A4DD /* dash_left_blue.png in Resources */,
+				2270E6261E7BC2420089A4DD /* dash_left_red.png in Resources */,
 				22BC7C8F1E79829D004D5551 /* dash_right_gray.png in Resources */,
 				22552B231E7ADBAB00B02BA2 /* again.png in Resources */,
 				22BC7C911E79A3B7004D5551 /* cross.png in Resources */,

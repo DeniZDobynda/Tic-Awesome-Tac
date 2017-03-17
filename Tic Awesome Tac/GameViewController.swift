@@ -17,7 +17,11 @@ class GameViewController: UIViewController {
 
     public var n: Int?
 
-    private var didWon: String = "0"
+    private var didWon: String = "0" /*{
+        willSet {
+            NSLog("Game: \(game.toString()) ( win:\(newValue))")
+        }
+    }*/
 
     private var winner: UIButton = UIButton()
     private var exit: UIButton = UIButton()
@@ -112,10 +116,6 @@ class GameViewController: UIViewController {
         let i = Int(split[0])!
         let j = Int(split[1])!
 
-        let right_b = UIImage(named: "dash_right_black.png") as UIImage?
-
-        let left_b = UIImage(named: "dash_left_black.png") as UIImage?
-
         //let size = game.size * 2
 
         let response = game.move(i: i, j: j, id: 1)
@@ -200,12 +200,10 @@ class GameViewController: UIViewController {
                         case "1":
                             didWon = "-1"
                         default:
-                            didWon = "0"
+                            break
                         }
 
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-                            self.check()
-                        })
+
 
                         /////////////////////////
 
@@ -263,10 +261,10 @@ class GameViewController: UIViewController {
 
                         if ( (ii+jj) % 2 == 0 ) {
                             //right
-                            buttons[ii][jj].setImage(right_b, for: .normal)
+                            buttons[ii][jj].setImage(UIImage(named: "dash_right_blue.png"), for: .normal)
                         } else {
                             //left
-                            buttons[ii][jj].setImage(left_b, for: .normal)
+                            buttons[ii][jj].setImage(UIImage(named: "dash_left_blue.png"), for: .normal)
                         }
                         buttons[ii][jj].removeTarget(nil, action: nil, for: .allEvents)
 
@@ -274,13 +272,16 @@ class GameViewController: UIViewController {
 
                 }
                 while(!game.move)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+                    self.check()
+                })
             }
 
             if ( (i+j) % 2 == 0 ) {
                 //right
-                buttons[i][j].setImage(right_b, for: .normal)
+                buttons[i][j].setImage(UIImage(named: "dash_right_red.png"), for: .normal)
             } else {
-                buttons[i][j].setImage(left_b, for: .normal)
+                buttons[i][j].setImage(UIImage(named: "dash_left_red.png"), for: .normal)
             }
             buttons[i][j].removeTarget(nil, action: nil, for: .allEvents)
                 //game.store(db:db)

@@ -184,7 +184,7 @@ class Matrix {
         return false
     }
 
-    private func didWon(id: Int) -> Int {
+    public func didWon(id: Int) -> Int {
         for i in 0..<size-1 {
             if ( fields_small[i].contains(0) || fields[i].contains(0)) {
                 return 0
@@ -227,7 +227,7 @@ class Matrix {
 
 
 class Game {
-    private var userId: Int = 0;
+//    private var userId: Int = 0;
     private var matrix: Matrix?
     public var move: Bool = true
     public var size: Int {
@@ -295,5 +295,9 @@ class Game {
         }
         while ( matrix?.isOccupiedDash(i: i, j: j) != 0)
         return (move(i: i, j: j, id: 2) ?? "^") + "^\(i):\(j)"
+    }
+
+    func toString() -> String {
+        return "Game \(size)x\(size); matrix: \(matrix!.didWon(id: 1))"
     }
 }
