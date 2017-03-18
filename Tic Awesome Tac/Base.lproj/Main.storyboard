@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zsH-Gj-Aes">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -10,6 +10,38 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--First Info View Controller-->
+        <scene sceneID="E2W-PK-BD7">
+            <objects>
+                <viewController storyboardIdentifier="FirstViewController" wantsFullScreenLayout="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sbK-bM-OZ0" customClass="FirstInfoViewController" customModule="Tic_Awesome_Tac" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kmZ-6Q-sc4"/>
+                        <viewControllerLayoutGuide type="bottom" id="c1h-yB-dgM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="UKq-fF-RaK">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Upi-E4-SO5">
+                                <rect key="frame" x="20" y="569" width="374" height="147"/>
+                                <state key="normal" title="Got it!"/>
+                                <connections>
+                                    <action selector="clear:" destination="sbK-bM-OZ0" eventType="touchUpInside" id="BU0-CF-GQf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Upi-E4-SO5" firstAttribute="trailing" secondItem="UKq-fF-RaK" secondAttribute="trailingMargin" id="iIr-BO-LYM"/>
+                            <constraint firstItem="c1h-yB-dgM" firstAttribute="top" secondItem="Upi-E4-SO5" secondAttribute="bottom" constant="20" id="isw-b3-4ba"/>
+                            <constraint firstItem="Upi-E4-SO5" firstAttribute="leading" secondItem="UKq-fF-RaK" secondAttribute="leadingMargin" id="lJp-Xc-sE0"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Zdm-mH-hJG" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="526" y="-297"/>
+        </scene>
         <!--Game View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -19,14 +51,14 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="136.80000000000001" y="137.18140929535232"/>
+            <point key="canvasLocation" x="526" y="487"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="dJk-To-2ix">
@@ -37,38 +69,42 @@
                         <viewControllerLayoutGuide type="bottom" id="caV-gd-yKa"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="2Od-XQ-F7S">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="chH-7A-w9X">
-                                <rect key="frame" x="26" y="28" width="323" height="631"/>
+                                <rect key="frame" x="30" y="28" width="354" height="700"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="title.png" translatesAutoresizingMaskIntoConstraints="NO" id="nua-Px-Mrh">
-                                        <rect key="frame" x="0.0" y="0.0" width="323" height="122"/>
-                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5uZ-4r-RIZ">
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="136"/>
+                                        <state key="normal" title="Button" image="title.png"/>
+                                        <connections>
+                                            <segue destination="sbK-bM-OZ0" kind="show" identifier="Info" id="5oF-hx-Ysw"/>
+                                        </connections>
+                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhh-96-avc">
-                                        <rect key="frame" x="0.0" y="127" width="323" height="122.5"/>
+                                        <rect key="frame" x="0.0" y="141" width="354" height="136"/>
                                         <state key="normal" image="3x3.png"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="Show 3" id="VuI-WJ-1i1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M44-93-TyG">
-                                        <rect key="frame" x="0.0" y="254.5" width="323" height="122"/>
+                                        <rect key="frame" x="0.0" y="282" width="354" height="136"/>
                                         <state key="normal" image="6x6.png"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="Show 6" id="jmV-LR-DGb"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9v0-0f-4qu">
-                                        <rect key="frame" x="0.0" y="381.5" width="323" height="122.5"/>
+                                        <rect key="frame" x="0.0" y="423" width="354" height="136"/>
                                         <state key="normal" image="9x9.png"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="Show 9" id="gz2-CZ-Q3K"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6RY-8M-ipa">
-                                        <rect key="frame" x="0.0" y="509" width="323" height="122"/>
+                                        <rect key="frame" x="0.0" y="564" width="354" height="136"/>
                                         <state key="normal" image="12x12.png"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="Show 12" id="K8d-w4-0Ye"/>

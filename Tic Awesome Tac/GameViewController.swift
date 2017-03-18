@@ -10,34 +10,56 @@ import UIKit
 
 class GameViewController: UIViewController {
 
-
     private var buttons = [[UIButton]]()
 
     private var game = Game(size: 1)
 
     public var n: Int?
 
-    private var didWon: String = "0" /*{
+    private var didWon: String = "0"
+    //    {
+    //        willSet {
+    //            NSLog("Game: \(game.toString()) ( win:\(newValue))")
+    //        }
+    //    }
+
+    private var lastMoveDashes = [(Int, Int)]()
+    private var lastMoveFields = [UIButton]()
+    private var lastMoveFiledsIndexes = [Int]()
+    private var didLastMoveWasUsers: Bool = true
+
+    private var moveAI: Bool = false {
         willSet {
-            NSLog("Game: \(game.toString()) ( win:\(newValue))")
+            if ( newValue == true ) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3, execute: {
+                    self.move()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
+                        self.check()
+                    })
+                })
+            }
         }
-    }*/
+    }
 
     private var winner: UIButton = UIButton()
+
     private var exit: UIButton = UIButton()
 
-    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.landscapeLeft
-    }
-    private func shouldAutorotate() -> Bool {
-        return true
-    }
-    override var prefersStatusBarHidden : Bool {
-        return true
-    }
+    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {return UIInterfaceOrientationMask.landscapeLeft}
+
+    private func shouldAutorotate() -> Bool {return true}
+
+    override var prefersStatusBarHidden : Bool {return true}
 
     override func viewDidLoad() {
         game = Game(size: n!)
+        lastMoveDashes = [(Int, Int)]()
+        lastMoveFields = [UIButton]()
+        lastMoveFiledsIndexes = [Int]()
+        didLastMoveWasUsers = true
+
+        self.view.backgroundColor = UIColor.white
+
         //game.load()
 
         let size = game.size * 2
@@ -112,14 +134,51 @@ class GameViewController: UIViewController {
     }
 
     func pressButton(button: UIButton) {
+        if moveAI == true {
+            return
+        }
+
+        if ( !didLastMoveWasUsers ) {
+            for (i,j) in lastMoveDashes {
+                if ( (i+j) % 2 == 0 ) {
+                    //right
+                    buttons[i][j].setImage(UIImage(named: "dash_right_black.png"), for: .normal)
+                } else {
+                    buttons[i][j].setImage(UIImage(named: "dash_left_black.png"), for: .normal)
+                }
+            }
+            for i in lastMoveFiledsIndexes {
+                lastMoveFields[i-1].setImage(UIImage(named: "circle_black.png"), for: .normal)
+            }
+            lastMoveDashes = [(Int, Int)]()
+            lastMoveFiledsIndexes = [Int]()
+            didLastMoveWasUsers = true
+
+        } else {
+            //            lastMoveDashes = [(Int, Int)]()
+            //            lastMoveFiledsIndexes = [Int]()
+            //            didLastMoveWasUsers = true
+        }
+
+
         let split = button.currentTitle!.components(separatedBy: ":")
         let i = Int(split[0])!
         let j = Int(split[1])!
 
-        //let size = game.size * 2
+        lastMoveDashes.append((i,j))
+
+
+        if ( (i+j) % 2 == 0 ) {
+            //right
+            buttons[i][j].setImage(UIImage(named: "dash_right_red.png"), for: .normal)
+        } else {
+            buttons[i][j].setImage(UIImage(named: "dash_left_red.png"), for: .normal)
+        }
+        buttons[i][j].removeTarget(nil, action: nil, for: .allEvents)
+
 
         let response = game.move(i: i, j: j, id: 1)
-        
+
         if ( response != nil ) {
 
             let array = response!.components(separatedBy: "^")
@@ -153,27 +212,31 @@ class GameViewController: UIViewController {
                     switch situation {
                     case "1", "3":
                         let button = UIButton(frame: CGRect(x: x + j*measure - measure, y: y + i*measure - measure, width: measure*2, height: measure*2))
-                        let image = UIImage(named: "cross.png")
-                        button.setBackgroundImage(image, for: .normal)
+                        button.setBackgroundImage(UIImage(named: "cross.png"), for: .normal)
                         self.view.addSubview(button)
+                        lastMoveFields.append(button)
+                        lastMoveFiledsIndexes.append(lastMoveFields.count)
 
                     case "2", "4":
                         let button = UIButton(frame: CGRect(x: x + j*measure , y: y + i*measure , width: measure*2, height: measure*2))
-                        let image = UIImage(named: "cross.png")
-                        button.setBackgroundImage(image, for: .normal)
+                        button.setBackgroundImage(UIImage(named: "cross.png"), for: .normal)
                         self.view.addSubview(button)
+                        lastMoveFields.append(button)
+                        lastMoveFiledsIndexes.append(lastMoveFields.count)
 
                     case "5", "7":
                         let button = UIButton(frame: CGRect(x: x + j*measure , y: y + i*measure - measure, width: measure*2, height: measure*2))
-                        let image = UIImage(named: "cross.png")
-                        button.setBackgroundImage(image, for: .normal)
+                        button.setBackgroundImage(UIImage(named: "cross.png"), for: .normal)
                         self.view.addSubview(button)
+                        lastMoveFields.append(button)
+                        lastMoveFiledsIndexes.append(lastMoveFields.count)
 
                     case "6", "8":
                         let button = UIButton(frame: CGRect(x: x + j*measure - measure , y: y + i*measure , width: measure*2, height: measure*2))
-                        let image = UIImage(named: "cross.png")
-                        button.setBackgroundImage(image, for: .normal)
+                        button.setBackgroundImage(UIImage(named: "cross.png"), for: .normal)
                         self.view.addSubview(button)
+                        lastMoveFields.append(button)
+                        lastMoveFiledsIndexes.append(lastMoveFields.count)
 
                     default:
                         print(situation)
@@ -182,110 +245,23 @@ class GameViewController: UIViewController {
                 }
             } else {
                 //move is not worthy
-                repeat {
-                    let iRespond = game.makeBestMove()
-
-                    if ( iRespond != nil ) {
-
-                        let array = iRespond!.components(separatedBy: "^")
-
-                        let coordinates = array[2].components(separatedBy: ":")
-                        let ii = Int(coordinates[0]) ?? 0
-                        let jj = Int(coordinates[1]) ?? 0
-
-                        ////////////////////////
-                        switch array[1] {
-                        case "-1":
-                            didWon = "1"
-                        case "1":
-                            didWon = "-1"
-                        default:
-                            break
-                        }
-
-
-
-                        /////////////////////////
-
-                        if ( array[0] != "") {
-
-                            let string = array[0].components(separatedBy: "|")
-
-
-
-                            var k = 0
-                            while ( k < string.count && string[k] != "" ) {
-                                let size = game.size * 2
-
-                                let b = view.bounds.maxX > view.bounds.maxY ? view.bounds.maxY : view.bounds.maxX
-
-                                let measure = (Int(b)-20) / size
-
-                                let x = Int(view.bounds.midX) - measure*game.size
-                                let y = Int(view.bounds.midY) - measure*game.size
-
-
-                                let situation = string[k].components(separatedBy: "-")[0]
-                                switch situation {
-                                case "1", "3":
-                                    let button = UIButton(frame: CGRect(x: x + jj*measure - measure, y: y + ii*measure - measure, width: measure*2, height: measure*2))
-                                    let image = UIImage(named: "circle.png")
-                                    button.setBackgroundImage(image, for: .normal)
-                                    self.view.addSubview(button)
-
-                                case "2", "4":
-                                    let button = UIButton(frame: CGRect(x: x + jj*measure , y: y + ii*measure , width: measure*2, height: measure*2))
-                                    let image = UIImage(named: "circle.png")
-                                    button.setBackgroundImage(image, for: .normal)
-                                    self.view.addSubview(button)
-
-                                case "5", "7":
-                                    let button = UIButton(frame: CGRect(x: x + jj*measure , y: y + ii*measure - measure, width: measure*2, height: measure*2))
-                                    let image = UIImage(named: "circle.png")
-                                    button.setBackgroundImage(image, for: .normal)
-                                    self.view.addSubview(button)
-                                    
-                                case "6", "8":
-                                    let button = UIButton(frame: CGRect(x: x + jj*measure - measure , y: y + ii*measure , width: measure*2, height: measure*2))
-                                    let image = UIImage(named: "circle.png")
-                                    button.setBackgroundImage(image, for: .normal)
-                                    self.view.addSubview(button)
-                                    
-                                default:
-                                    print(situation)
-                                }
-                                k+=1
-                            }
-                        }
-
-
-                        if ( (ii+jj) % 2 == 0 ) {
-                            //right
-                            buttons[ii][jj].setImage(UIImage(named: "dash_right_blue.png"), for: .normal)
-                        } else {
-                            //left
-                            buttons[ii][jj].setImage(UIImage(named: "dash_left_blue.png"), for: .normal)
-                        }
-                        buttons[ii][jj].removeTarget(nil, action: nil, for: .allEvents)
-
+                for (i,j) in lastMoveDashes {
+                    if ( (i+j) % 2 == 0 ) {
+                        //right
+                        buttons[i][j].setImage(UIImage(named: "dash_right_black.png"), for: .normal)
+                    } else {
+                        buttons[i][j].setImage(UIImage(named: "dash_left_black.png"), for: .normal)
                     }
-
                 }
-                while(!game.move)
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1.0, execute: {
-                    self.check()
-                })
+                for i in lastMoveFiledsIndexes {
+                    lastMoveFields[i-1].setImage(UIImage(named: "cross_black.png"), for: .normal)
+                }
+                lastMoveDashes = [(Int, Int)]()
+                lastMoveFiledsIndexes = [Int]()
+                didLastMoveWasUsers = false
+                moveAI = true
             }
 
-            if ( (i+j) % 2 == 0 ) {
-                //right
-                buttons[i][j].setImage(UIImage(named: "dash_right_red.png"), for: .normal)
-            } else {
-                buttons[i][j].setImage(UIImage(named: "dash_left_red.png"), for: .normal)
-            }
-            buttons[i][j].removeTarget(nil, action: nil, for: .allEvents)
-                //game.store(db:db)
-                //game.load(db:db)
 
         }
 
@@ -293,49 +269,142 @@ class GameViewController: UIViewController {
 
     private func check() {
 
-        if ( didWon == "1" ) {
-            //win!
-            view.subviews.forEach({ $0.removeFromSuperview() })
-
-            let imageView = UIImageView(frame: CGRect(x: 10 , y: 20, width: view.bounds.maxX-20, height: view.bounds.maxY/2-40))
-            imageView.image = UIImage(named: "winner.png")
-            self.view.addSubview(imageView)
-
-            winner = UIButton(frame: CGRect(x: view.bounds.maxX/2 , y: view.bounds.maxY/2, width: view.bounds.maxX/2 - 10, height: view.bounds.maxY/4 - 20))
-            winner.setBackgroundImage(UIImage(named: "again.png"), for: .normal)
+        if ( didWon != "0"){
+            winner = UIButton(frame: CGRect(x: 10 , y: view.bounds.maxY - abs(view.bounds.maxY-view.bounds.maxX)/2, width: view.bounds.maxX-20, height: view.bounds.maxY/4 - 20))
+            //winner.setBackgroundImage(UIImage(named: "again.png"), for: .normal)
             winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
+            winner.setTitle("X - \(game.score.0)\tY - \(game.score.1)", for: .normal)
+            winner.setTitleColor(UIColor.black, for: .normal)
+            winner.backgroundColor = UIColor.cyan
             self.view.addSubview(winner)
+        }
 
-            let menu = UIButton(frame: CGRect(x: 10, y: view.bounds.maxY/2, width: view.bounds.maxX/2 - 10, height: view.bounds.maxY/4 - 20))
-            menu.setBackgroundImage(UIImage(named: "menu.png"), for: .normal)
-            menu.addTarget(self, action: #selector(close(button:)), for: .touchUpInside)
-            self.view.addSubview(menu)
+        if ( didWon == "1" ) {
 
-            return
+            self.view.backgroundColor = UIColor.green
 
+            for (i,j) in lastMoveDashes {
+                if ( (i+j) % 2 == 0 ) {
+                    //right
+                    buttons[i][j].setImage(UIImage(named: "dash_right_black.png"), for: .normal)
+                } else {
+                    buttons[i][j].setImage(UIImage(named: "dash_left_black.png"), for: .normal)
+                }
+            }
+            for i in lastMoveFiledsIndexes {
+                lastMoveFields[i-1].setImage(UIImage(named: "cross_black.png"), for: .normal)
+            }
 
         } else if ( didWon == "-1" ) {
-            //loss
-            view.subviews.forEach({ $0.removeFromSuperview() })
 
-            let imageView = UIImageView(frame: CGRect(x: 10 , y: 20, width: view.bounds.maxX-20, height: view.bounds.maxY/2-40))
-            imageView.image = UIImage(named: "looser.png")
-            self.view.addSubview(imageView)
+            self.view.backgroundColor = UIColor.red
 
-            winner = UIButton(frame: CGRect(x: view.bounds.maxX/2 , y: view.bounds.maxY/2, width: view.bounds.maxX/2 - 10, height: view.bounds.maxY/4 - 20))
-            winner.setBackgroundImage(UIImage(named: "again.png"), for: .normal)
-            winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
-            self.view.addSubview(winner)
-
-            let menu = UIButton(frame: CGRect(x: 10, y: view.bounds.maxY/2, width: view.bounds.maxX/2 - 10, height: view.bounds.maxY/4 - 20))
-            menu.setBackgroundImage(UIImage(named: "menu.png"), for: .normal)
-            menu.addTarget(self, action: #selector(close(button:)), for: .touchUpInside)
-            self.view.addSubview(menu)
-
-            return
-
+            for (i,j) in lastMoveDashes {
+                if ( (i+j) % 2 == 0 ) {
+                    //right
+                    buttons[i][j].setImage(UIImage(named: "dash_right_black.png"), for: .normal)
+                } else {
+                    buttons[i][j].setImage(UIImage(named: "dash_left_black.png"), for: .normal)
+                }
+            }
+            for i in lastMoveFiledsIndexes {
+                lastMoveFields[i-1].setImage(UIImage(named: "circle_black.png"), for: .normal)
+            }
         }
     }
 
+    private func move() {
+
+        let iRespond = game.makeBestMove()
+
+        if ( iRespond != nil ) {
+
+            let array = iRespond!.components(separatedBy: "^")
+
+            let coordinates = array[2].components(separatedBy: ":")
+            let ii = Int(coordinates[0]) ?? 0
+            let jj = Int(coordinates[1]) ?? 0
+
+            lastMoveDashes.append((ii, jj))
+
+            ////////////////////////
+            switch array[1] {
+            case "-1":
+                didWon = "1"
+            case "1":
+                didWon = "-1"
+            default:
+                break
+            }
+            /////////////////////////
+
+            if ( array[0] != "") {
+
+                let string = array[0].components(separatedBy: "|")
+
+
+
+                var k = 0
+                while ( k < string.count && string[k] != "" ) {
+                    let size = game.size * 2
+
+                    let b = view.bounds.maxX > view.bounds.maxY ? view.bounds.maxY : view.bounds.maxX
+
+                    let measure = (Int(b)-20) / size
+
+                    let x = Int(view.bounds.midX) - measure*game.size
+                    let y = Int(view.bounds.midY) - measure*game.size
+
+
+                    let situation = string[k].components(separatedBy: "-")[0]
+                    switch situation {
+                    case "1", "3":
+                        let button = UIButton(frame: CGRect(x: x + jj*measure - measure, y: y + ii*measure - measure, width: measure*2, height: measure*2))
+                        button.setBackgroundImage(UIImage(named: "circle.png"), for: .normal)
+                        self.view.addSubview(button)
+                        lastMoveFields.append(button)
+                        lastMoveFiledsIndexes.append(lastMoveFields.count)
+
+                    case "2", "4":
+                        let button = UIButton(frame: CGRect(x: x + jj*measure , y: y + ii*measure , width: measure*2, height: measure*2))
+                        button.setBackgroundImage(UIImage(named: "circle.png"), for: .normal)
+                        self.view.addSubview(button)
+                        lastMoveFields.append(button)
+                        lastMoveFiledsIndexes.append(lastMoveFields.count)
+
+                    case "5", "7":
+                        let button = UIButton(frame: CGRect(x: x + jj*measure , y: y + ii*measure - measure, width: measure*2, height: measure*2))
+                        button.setBackgroundImage(UIImage(named: "circle.png"), for: .normal)
+                        self.view.addSubview(button)
+                        lastMoveFields.append(button)
+                        lastMoveFiledsIndexes.append(lastMoveFields.count)
+
+                    case "6", "8":
+                        let button = UIButton(frame: CGRect(x: x + jj*measure - measure , y: y + ii*measure , width: measure*2, height: measure*2))
+                        button.setBackgroundImage(UIImage(named: "circle.png"), for: .normal)
+                        self.view.addSubview(button)
+                        lastMoveFields.append(button)
+                        lastMoveFiledsIndexes.append(lastMoveFields.count)
+                        
+                    default:
+                        print(situation)
+                    }
+                    k+=1
+                }
+            }
+            
+            if ( (ii+jj) % 2 == 0 ) {
+                //right
+                buttons[ii][jj].setImage(UIImage(named: "dash_right_blue.png"), for: .normal)
+            } else {
+                //left
+                buttons[ii][jj].setImage(UIImage(named: "dash_left_blue.png"), for: .normal)
+            }
+            buttons[ii][jj].removeTarget(nil, action: nil, for: .allEvents)
+            
+            moveAI = !game.move
+        }
+    }
+    
 }
 

@@ -54,9 +54,10 @@ class MenuViewController: UIViewController {
                 destinationVC.n = 12
             }
         default:
-            if let destinationVC = segue.destination as? GameViewController {
-                destinationVC.n = 0
-            }
+//            if let destinationVC = segue.destination as? GameViewController {
+//                destinationVC.n = 0
+//            }
+            break
         }
     }
 

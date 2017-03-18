@@ -223,6 +223,31 @@ class Matrix {
         }
         return dash[i][j]
     }
+
+    public func getScore() -> (Int, Int) {
+        var count = 0
+        var count2 = 0
+        for arr in fields {
+            for i in 0..<size {
+                if ( arr[i] == 1) {
+                    count += 1
+                } else if ( arr[i] == 2) {
+                    count2 += 1
+                }
+            }
+        }
+        for arr in fields_small {
+            for i in 0..<size-1 {
+                if ( arr[i] == 1) {
+                    count += 1
+                } else if ( arr[i] == 2) {
+                    count2 += 1
+                }
+            }
+        }
+
+        return (count, count2)
+    }
 }
 
 
@@ -232,6 +257,11 @@ class Game {
     public var move: Bool = true
     public var size: Int {
         get { return matrix != nil ? matrix!.size : 0 }
+    }
+    public var score: (Int, Int) {
+        get {
+            return matrix!.getScore()
+        }
     }
 
     init(size: Int) {
@@ -254,7 +284,6 @@ class Game {
     public func isOccupied(i: Int, j: Int) -> Bool {
         return matrix!.isOccupiedDash(i: i, j: j) == 1
     }
-
 
     public func makeBestMove() -> String? {
         var i = 0
