@@ -64,7 +64,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="526" y="487"/>
+            <point key="canvasLocation" x="524.63768115942037" y="486.68478260869568"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="dJk-To-2ix">
@@ -143,6 +143,6 @@
         <image name="title.png" width="534" height="267"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="VuI-WJ-1i1"/>
+        <segue reference="jmV-LR-DGb"/>
     </inferredMetricsTieBreakers>
 </document>

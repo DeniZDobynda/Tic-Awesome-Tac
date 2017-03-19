@@ -224,6 +224,14 @@ class Matrix {
         return dash[i][j]
     }
 
+    public func isOccupiedField(_ i: Int, _ j: Int, small: Bool) -> Bool {
+        if small {
+            return fields_small[i][j] != 0
+        } else {
+            return fields[i][j] != 0
+        }
+    }
+
     public func getScore() -> (Int, Int) {
         var count = 0
         var count2 = 0
@@ -264,7 +272,7 @@ class Game {
         }
     }
 
-    init(size: Int) {
+    init(_ size: Int) {
         matrix = Matrix(size: size)
     }
 
@@ -282,7 +290,11 @@ class Game {
     }
 
     public func isOccupied(i: Int, j: Int) -> Bool {
-        return matrix!.isOccupiedDash(i: i, j: j) == 1
+        return matrix!.isOccupiedDash(i: i, j: j) != 0
+    }
+
+    public func isOccupiedField(_ i: Int, _ j: Int, small: Bool) -> Bool {
+        return matrix!.isOccupiedField(i,j, small: small)
     }
 
     public func makeBestMove() -> String? {

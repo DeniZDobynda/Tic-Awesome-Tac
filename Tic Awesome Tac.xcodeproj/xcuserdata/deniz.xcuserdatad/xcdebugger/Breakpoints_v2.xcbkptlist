@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tic Awesome Tac/GameViewController.swift"
-            timestampString = "511617808.997239"
+            timestampString = "511656718.329925"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "190"
-            endingLineNumber = "190"
+            startingLineNumber = "367"
+            endingLineNumber = "367"
             landmarkName = "pressButton(button:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tic Awesome Tac/Model.swift"
-            timestampString = "511564761.722737"
+            timestampString = "511645044.341845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "288"
-            endingLineNumber = "288"
+            startingLineNumber = "300"
+            endingLineNumber = "300"
             landmarkName = "makeBestMove()"
             landmarkType = "7">
          </BreakpointContent>
@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tic Awesome Tac/Model.swift"
-            timestampString = "511564761.722737"
+            timestampString = "511645044.341845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "324"
-            endingLineNumber = "324"
+            startingLineNumber = "336"
+            endingLineNumber = "336"
             landmarkName = "makeBestMove()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tic Awesome Tac/Model.swift"
-            timestampString = "511564761.722737"
+            timestampString = "511645044.341845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "306"
-            endingLineNumber = "306"
+            startingLineNumber = "318"
+            endingLineNumber = "318"
             landmarkName = "makeBestMove()"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tic Awesome Tac/Model.swift"
-            timestampString = "511564761.722737"
+            timestampString = "511645044.341845"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "308"
-            endingLineNumber = "308"
+            startingLineNumber = "320"
+            endingLineNumber = "320"
             landmarkName = "makeBestMove()"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,12 +90,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Tic Awesome Tac/GameViewController.swift"
-            timestampString = "511617808.997239"
+            timestampString = "511656718.329925"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "146"
-            endingLineNumber = "146"
-            landmarkName = "pressButton(button:)"
+            startingLineNumber = "247"
+            endingLineNumber = "247"
+            landmarkName = "reDraw()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
