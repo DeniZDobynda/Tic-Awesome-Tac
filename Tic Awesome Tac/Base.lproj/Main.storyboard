@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--First Info View Controller-->
+        <!--Image View Controller-->
         <scene sceneID="E2W-PK-BD7">
             <objects>
-                <viewController storyboardIdentifier="FirstViewController" wantsFullScreenLayout="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sbK-bM-OZ0" customClass="FirstInfoViewController" customModule="Tic_Awesome_Tac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FirstViewController" wantsFullScreenLayout="YES" useStoryboardIdentifierAsRestorationIdentifier="YES" id="sbK-bM-OZ0" customClass="ImageViewController" customModule="Tic_Awesome_Tac" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kmZ-6Q-sc4"/>
                         <viewControllerLayoutGuide type="bottom" id="c1h-yB-dgM"/>
@@ -22,25 +22,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Upi-E4-SO5">
-                                <rect key="frame" x="20" y="569" width="374" height="147"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="14Q-lb-thH">
+                                <rect key="frame" x="20" y="623" width="374" height="93"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="93" id="scV-1W-c58"/>
+                                </constraints>
+                                <size key="titleShadowOffset" width="5" height="0.0"/>
                                 <state key="normal" title="Got it!"/>
                                 <connections>
-                                    <action selector="clear:" destination="sbK-bM-OZ0" eventType="touchUpInside" id="BU0-CF-GQf"/>
+                                    <action selector="clear:" destination="sbK-bM-OZ0" eventType="touchUpInside" id="Wff-FS-uDk"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="Upi-E4-SO5" firstAttribute="trailing" secondItem="UKq-fF-RaK" secondAttribute="trailingMargin" id="iIr-BO-LYM"/>
-                            <constraint firstItem="c1h-yB-dgM" firstAttribute="top" secondItem="Upi-E4-SO5" secondAttribute="bottom" constant="20" id="isw-b3-4ba"/>
-                            <constraint firstItem="Upi-E4-SO5" firstAttribute="leading" secondItem="UKq-fF-RaK" secondAttribute="leadingMargin" id="lJp-Xc-sE0"/>
+                            <constraint firstItem="14Q-lb-thH" firstAttribute="trailing" secondItem="UKq-fF-RaK" secondAttribute="trailingMargin" id="BCa-MC-sor"/>
+                            <constraint firstItem="14Q-lb-thH" firstAttribute="leading" secondItem="UKq-fF-RaK" secondAttribute="leadingMargin" id="e1c-71-Ntp"/>
+                            <constraint firstAttribute="bottom" secondItem="14Q-lb-thH" secondAttribute="bottom" constant="20" symbolic="YES" id="r3X-Wh-Ueg"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="q1B-Hi-d3T"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zdm-mH-hJG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="526" y="-297"/>
+            <point key="canvasLocation" x="524.63768115942037" y="-287.77173913043481"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -64,7 +69,7 @@
         <!--Menu View Controller-->
         <scene sceneID="dJk-To-2ix">
             <objects>
-                <viewController id="zsH-Gj-Aes" customClass="MenuViewController" customModule="Tic_Awesome_Tac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="zsH-Gj-Aes" customClass="MenuViewController" customModule="Tic_Awesome_Tac" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="n1v-od-UVj"/>
                         <viewControllerLayoutGuide type="bottom" id="caV-gd-yKa"/>
@@ -80,7 +85,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="354" height="136"/>
                                         <state key="normal" image="title.png"/>
                                         <connections>
-                                            <segue destination="sbK-bM-OZ0" kind="show" identifier="Info" id="5oF-hx-Ysw"/>
+                                            <segue destination="sbK-bM-OZ0" kind="presentation" identifier="Info" id="KWF-ZB-qpN"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhh-96-avc">
@@ -123,10 +128,11 @@
                             <constraint firstItem="chH-7A-w9X" firstAttribute="leading" secondItem="2Od-XQ-F7S" secondAttribute="leadingMargin" constant="10" id="wVY-oq-Dbu"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="DxR-Jp-icV"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7On-SL-g57" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-650.39999999999998" y="136.28185907046478"/>
+            <point key="canvasLocation" x="-657" y="487"/>
         </scene>
     </scenes>
     <resources>

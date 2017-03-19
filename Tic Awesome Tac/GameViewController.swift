@@ -27,6 +27,7 @@ class GameViewController: UIViewController {
     private var lastMoveFields = [UIButton]()
     private var lastMoveFiledsIndexes = [Int]()
     private var didLastMoveWasUsers: Bool = true
+    private var gameView = UIView()
 
     private var moveAI: Bool = false {
         willSet {
@@ -58,18 +59,26 @@ class GameViewController: UIViewController {
         lastMoveFiledsIndexes = [Int]()
         didLastMoveWasUsers = true
 
-        self.view.backgroundColor = UIColor.white
-
-        //game.load()
-
-        let size = game.size * 2
-
         let b = view.bounds.maxX > view.bounds.maxY ? view.bounds.maxY : view.bounds.maxX
 
-        let measure = (Int(b)-20) / size
+        self.view.backgroundColor = UIColor.white
 
-        let x = Int(view.bounds.midX) - measure*game.size
-        let y = Int(view.bounds.midY) - measure*game.size
+        let triangleSide = sqrt(b*b/2)
+
+        gameView = UIView(frame: CGRect(x: (view.bounds.maxX - triangleSide)/2 , y: (view.bounds.maxY - triangleSide)/2, width: triangleSide, height: triangleSide))
+
+        gameView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI/4))
+//        gameView.transform = CGAffineTransform.identity
+        gameView.backgroundColor = UIColor.white
+        self.view.addSubview(gameView)
+
+        let size = n! * 2
+
+
+        let measure = Int(triangleSide) / size
+
+        let x = Int(gameView.bounds.midX) - measure*n!
+        let y = Int(gameView.bounds.midY) - measure*n!
 
         buttons = Array(repeating: Array(repeating: UIButton(), count: size), count: size)
 
@@ -107,11 +116,11 @@ class GameViewController: UIViewController {
 
 
 
-                self.view.addSubview(buttons[i][j])
+                gameView.addSubview(buttons[i][j])
             }
         }
 
-        let height = x < y ? y - 20 : x - 20
+        let height = view.bounds.maxY/2 - triangleSide/2
         exit = UIButton(frame: CGRect(x: 10, y: 10, width: height, height: height))
         exit.setImage(UIImage(named: "home.jpg"), for: .normal)
         exit.addTarget(self, action: #selector(close(button:)), for: .touchUpInside)
@@ -127,7 +136,8 @@ class GameViewController: UIViewController {
     }
 
     func winner(button: UIButton) {
-        view.subviews.forEach({ $0.removeFromSuperview() })
+        gameView.subviews.forEach({ $0.removeFromSuperview() })
+        self.view.subviews.forEach({ $0.removeFromSuperview() })
         game = Game(size: n!)
         winner = UIButton()
         self.viewDidLoad()
@@ -198,14 +208,14 @@ class GameViewController: UIViewController {
 
                 var k = 0
                 while ( k < string.count - 1 ) {
-                    let size = game.size * 2
+                    let size = n! * 2
 
-                    let b = view.bounds.maxX > view.bounds.maxY ? view.bounds.maxY : view.bounds.maxX
+                    let b = gameView.bounds.maxX > gameView.bounds.maxY ? gameView.bounds.maxY : gameView.bounds.maxX
 
-                    let measure = (Int(b)-20) / size
+                    let measure = Int(b) / size
 
-                    let x = Int(view.bounds.midX) - measure*game.size
-                    let y = Int(view.bounds.midY) - measure*game.size
+                    let x = Int(gameView.bounds.midX) - measure*n!
+                    let y = Int(gameView.bounds.midY) - measure*n!
 
 
                     let situation = string[k].components(separatedBy: "-")[0]
@@ -213,28 +223,28 @@ class GameViewController: UIViewController {
                     case "1", "3":
                         let button = UIButton(frame: CGRect(x: x + j*measure - measure, y: y + i*measure - measure, width: measure*2, height: measure*2))
                         button.setBackgroundImage(UIImage(named: "cross.png"), for: .normal)
-                        self.view.addSubview(button)
+                        gameView.addSubview(button)
                         lastMoveFields.append(button)
                         lastMoveFiledsIndexes.append(lastMoveFields.count)
 
                     case "2", "4":
                         let button = UIButton(frame: CGRect(x: x + j*measure , y: y + i*measure , width: measure*2, height: measure*2))
                         button.setBackgroundImage(UIImage(named: "cross.png"), for: .normal)
-                        self.view.addSubview(button)
+                        gameView.addSubview(button)
                         lastMoveFields.append(button)
                         lastMoveFiledsIndexes.append(lastMoveFields.count)
 
                     case "5", "7":
                         let button = UIButton(frame: CGRect(x: x + j*measure , y: y + i*measure - measure, width: measure*2, height: measure*2))
                         button.setBackgroundImage(UIImage(named: "cross.png"), for: .normal)
-                        self.view.addSubview(button)
+                        gameView.addSubview(button)
                         lastMoveFields.append(button)
                         lastMoveFiledsIndexes.append(lastMoveFields.count)
 
                     case "6", "8":
                         let button = UIButton(frame: CGRect(x: x + j*measure - measure , y: y + i*measure , width: measure*2, height: measure*2))
                         button.setBackgroundImage(UIImage(named: "cross.png"), for: .normal)
-                        self.view.addSubview(button)
+                        gameView.addSubview(button)
                         lastMoveFields.append(button)
                         lastMoveFiledsIndexes.append(lastMoveFields.count)
 
@@ -277,11 +287,14 @@ class GameViewController: UIViewController {
             winner.setTitleColor(UIColor.black, for: .normal)
             winner.backgroundColor = UIColor.cyan
             self.view.addSubview(winner)
+
+
         }
 
         if ( didWon == "1" ) {
 
             self.view.backgroundColor = UIColor.green
+            gameView.backgroundColor = UIColor.green
 
             if ( didLastMoveWasUsers) {
                 for (i,j) in lastMoveDashes {
@@ -300,6 +313,7 @@ class GameViewController: UIViewController {
         } else if ( didWon == "-1" ) {
 
             self.view.backgroundColor = UIColor.red
+            gameView.backgroundColor = UIColor.red
 
             if ( !didLastMoveWasUsers) {
                 for (i,j) in lastMoveDashes {
@@ -350,14 +364,14 @@ class GameViewController: UIViewController {
 
                 var k = 0
                 while ( k < string.count && string[k] != "" ) {
-                    let size = game.size * 2
+                    let size = n! * 2
 
-                    let b = view.bounds.maxX > view.bounds.maxY ? view.bounds.maxY : view.bounds.maxX
+                    let b = gameView.bounds.maxX > gameView.bounds.maxY ? gameView.bounds.maxY : gameView.bounds.maxX
 
-                    let measure = (Int(b)-20) / size
+                    let measure = Int(b) / size
 
-                    let x = Int(view.bounds.midX) - measure*game.size
-                    let y = Int(view.bounds.midY) - measure*game.size
+                    let x = Int(gameView.bounds.midX) - measure*n!
+                    let y = Int(gameView.bounds.midY) - measure*n!
 
 
                     let situation = string[k].components(separatedBy: "-")[0]
@@ -365,28 +379,28 @@ class GameViewController: UIViewController {
                     case "1", "3":
                         let button = UIButton(frame: CGRect(x: x + jj*measure - measure, y: y + ii*measure - measure, width: measure*2, height: measure*2))
                         button.setBackgroundImage(UIImage(named: "circle.png"), for: .normal)
-                        self.view.addSubview(button)
+                        gameView.addSubview(button)
                         lastMoveFields.append(button)
                         lastMoveFiledsIndexes.append(lastMoveFields.count)
 
                     case "2", "4":
                         let button = UIButton(frame: CGRect(x: x + jj*measure , y: y + ii*measure , width: measure*2, height: measure*2))
                         button.setBackgroundImage(UIImage(named: "circle.png"), for: .normal)
-                        self.view.addSubview(button)
+                        self.gameView.addSubview(button)
                         lastMoveFields.append(button)
                         lastMoveFiledsIndexes.append(lastMoveFields.count)
 
                     case "5", "7":
                         let button = UIButton(frame: CGRect(x: x + jj*measure , y: y + ii*measure - measure, width: measure*2, height: measure*2))
                         button.setBackgroundImage(UIImage(named: "circle.png"), for: .normal)
-                        self.view.addSubview(button)
+                        self.gameView.addSubview(button)
                         lastMoveFields.append(button)
                         lastMoveFiledsIndexes.append(lastMoveFields.count)
 
                     case "6", "8":
                         let button = UIButton(frame: CGRect(x: x + jj*measure - measure , y: y + ii*measure , width: measure*2, height: measure*2))
                         button.setBackgroundImage(UIImage(named: "circle.png"), for: .normal)
-                        self.view.addSubview(button)
+                        self.gameView.addSubview(button)
                         lastMoveFields.append(button)
                         lastMoveFiledsIndexes.append(lastMoveFields.count)
                         

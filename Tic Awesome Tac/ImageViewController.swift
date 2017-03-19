@@ -8,22 +8,20 @@
 
 import UIKit
 
-class FirstInfoViewController: UIViewController {
+class ImageViewController: UIViewController {
 
-    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
-        return UIInterfaceOrientationMask.landscapeLeft
-    }
-    private func shouldAutorotate() -> Bool {
-        return true
-    }
-    override var prefersStatusBarHidden : Bool {
-        return true
-    }
+    private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {return UIInterfaceOrientationMask.landscapeLeft}
+    private func shouldAutorotate() -> Bool {return true}
+    override var prefersStatusBarHidden : Bool {return true}
 
     public var tutorial: UIImage? = nil
     public weak var sub: UIViewController? = nil
 
     private var tutorialView: UIImageView? = nil
+
+    @IBAction func clear(_ sender: UIButton) {
+        dismiss(animated: true, completion: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,18 +29,16 @@ class FirstInfoViewController: UIViewController {
         if ( tutorial == nil) {
 
             let loading = UILabel(frame: CGRect(x: 20.0, y: 50.0, width: self.view.frame.size.width - 40, height: self.view.frame.size.width - 40))
-            loading.text = "Making tutorial..."
+            loading.text = "Making tutorial... Please, wait."
             loading.textColor = UIColor.black
             loading.backgroundColor = UIColor.cyan
             view.addSubview(loading)
 
-            DispatchQueue.global(qos: .background).async { [weak self]
-                () -> Void in
+            DispatchQueue.global(qos: .userInitiated).async { [weak self] in
                 self?.tutorial = UIImage.gifImageWithName(name: "tutorial")
 
 
-                DispatchQueue.main.async {
-                    () -> Void in
+                DispatchQueue.main.sync { [weak self] in
                     let imageView = UIImageView(image: self?.tutorial)
                     imageView.frame = CGRect(x: 20.0, y: 50.0, width: (self?.view.frame.size.width)! - 40, height: (self?.view.frame.size.width)! - 40)
                     self?.view.willRemoveSubview(loading)
@@ -81,24 +77,5 @@ class FirstInfoViewController: UIViewController {
         }
 
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    @IBAction func clear(_ sender: UIButton) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

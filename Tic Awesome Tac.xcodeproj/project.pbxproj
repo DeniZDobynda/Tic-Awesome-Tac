@@ -26,7 +26,7 @@
 		2270E6261E7BC2420089A4DD /* dash_left_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 2270E6221E7BC2420089A4DD /* dash_left_red.png */; };
 		2270E6271E7BC2420089A4DD /* dash_right_blue.png in Resources */ = {isa = PBXBuildFile; fileRef = 2270E6231E7BC2420089A4DD /* dash_right_blue.png */; };
 		2270E6281E7BC2420089A4DD /* dash_right_red.png in Resources */ = {isa = PBXBuildFile; fileRef = 2270E6241E7BC2420089A4DD /* dash_right_red.png */; };
-		2270E62E1E7BF2180089A4DD /* FirstInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270E62D1E7BF2180089A4DD /* FirstInfoViewController.swift */; };
+		2270E62E1E7BF2180089A4DD /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2270E62D1E7BF2180089A4DD /* ImageViewController.swift */; };
 		2270E6321E7BF4090089A4DD /* tutorial.gif in Resources */ = {isa = PBXBuildFile; fileRef = 2270E6311E7BF4090089A4DD /* tutorial.gif */; };
 		22BC7C6B1E791312004D5551 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BC7C6A1E791312004D5551 /* AppDelegate.swift */; };
 		22BC7C6D1E791312004D5551 /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22BC7C6C1E791312004D5551 /* GameViewController.swift */; };
@@ -62,7 +62,7 @@
 		2270E6221E7BC2420089A4DD /* dash_left_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dash_left_red.png; path = "Tic Awesome Tac/Images/dash_left_red.png"; sourceTree = "<group>"; };
 		2270E6231E7BC2420089A4DD /* dash_right_blue.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dash_right_blue.png; path = "Tic Awesome Tac/Images/dash_right_blue.png"; sourceTree = "<group>"; };
 		2270E6241E7BC2420089A4DD /* dash_right_red.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = dash_right_red.png; path = "Tic Awesome Tac/Images/dash_right_red.png"; sourceTree = "<group>"; };
-		2270E62D1E7BF2180089A4DD /* FirstInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirstInfoViewController.swift; sourceTree = "<group>"; };
+		2270E62D1E7BF2180089A4DD /* ImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
 		2270E6311E7BF4090089A4DD /* tutorial.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = tutorial.gif; path = "Tic Awesome Tac/Images/tutorial.gif"; sourceTree = "<group>"; };
 		22BC7C671E791311004D5551 /* Tic Awesome Tac.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tic Awesome Tac.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		22BC7C6A1E791312004D5551 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 				2270E6331E7C1DAA0089A4DD /* Supporting Files */,
 				22BC7C6C1E791312004D5551 /* GameViewController.swift */,
 				22BC7C6E1E791312004D5551 /* Main.storyboard */,
-				2270E62D1E7BF2180089A4DD /* FirstInfoViewController.swift */,
+				2270E62D1E7BF2180089A4DD /* ImageViewController.swift */,
 				22552B131E7A921A00B02BA2 /* MenuViewController.swift */,
 				22BC7C711E791312004D5551 /* Tic_Awesome_Tac.xcdatamodeld */,
 				22BC7C7F1E791348004D5551 /* Model.swift */,
@@ -264,7 +264,7 @@
 				221966E81E7DC18500C933E9 /* iOSDevCenters+GIF.swift in Sources */,
 				22552B141E7A921A00B02BA2 /* MenuViewController.swift in Sources */,
 				22BC7C6B1E791312004D5551 /* AppDelegate.swift in Sources */,
-				2270E62E1E7BF2180089A4DD /* FirstInfoViewController.swift in Sources */,
+				2270E62E1E7BF2180089A4DD /* ImageViewController.swift in Sources */,
 				22BC7C731E791312004D5551 /* Tic_Awesome_Tac.xcdatamodeld in Sources */,
 				22BC7C801E791349004D5551 /* Model.swift in Sources */,
 			);
