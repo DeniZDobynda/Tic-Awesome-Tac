@@ -54,6 +54,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <gestureRecognizers/>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -77,7 +78,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5uZ-4r-RIZ">
                                         <rect key="frame" x="0.0" y="0.0" width="354" height="136"/>
-                                        <state key="normal" title="Button" image="title.png"/>
+                                        <state key="normal" image="title.png"/>
                                         <connections>
                                             <segue destination="sbK-bM-OZ0" kind="show" identifier="Info" id="5oF-hx-Ysw"/>
                                         </connections>

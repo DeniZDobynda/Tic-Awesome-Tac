@@ -197,7 +197,7 @@ class GameViewController: UIViewController {
                 let string = array[0].components(separatedBy: "|")
 
                 var k = 0
-                while ( k < string.count ) {
+                while ( k < string.count - 1 ) {
                     let size = game.size * 2
 
                     let b = view.bounds.maxX > view.bounds.maxY ? view.bounds.maxY : view.bounds.maxX
@@ -239,7 +239,7 @@ class GameViewController: UIViewController {
                         lastMoveFiledsIndexes.append(lastMoveFields.count)
 
                     default:
-                        print(situation)
+                        print("situation (r): "+response!)
                     }
                     k+=1
                 }
@@ -270,7 +270,7 @@ class GameViewController: UIViewController {
     private func check() {
 
         if ( didWon != "0"){
-            winner = UIButton(frame: CGRect(x: 10 , y: view.bounds.maxY - abs(view.bounds.maxY-view.bounds.maxX)/2, width: view.bounds.maxX-20, height: view.bounds.maxY/4 - 20))
+            winner = UIButton(frame: CGRect(x: 10 , y: view.bounds.maxY - abs(view.bounds.maxY-view.bounds.maxX)/2, width: view.bounds.maxX-20, height: abs(view.bounds.maxY-view.bounds.maxX)/2 - 20))
             //winner.setBackgroundImage(UIImage(named: "again.png"), for: .normal)
             winner.addTarget(self, action: #selector(winner(button:)), for: .touchUpInside)
             winner.setTitle("X - \(game.score.0)\tY - \(game.score.1)", for: .normal)
@@ -283,32 +283,36 @@ class GameViewController: UIViewController {
 
             self.view.backgroundColor = UIColor.green
 
-            for (i,j) in lastMoveDashes {
-                if ( (i+j) % 2 == 0 ) {
-                    //right
-                    buttons[i][j].setImage(UIImage(named: "dash_right_black.png"), for: .normal)
-                } else {
-                    buttons[i][j].setImage(UIImage(named: "dash_left_black.png"), for: .normal)
+            if ( didLastMoveWasUsers) {
+                for (i,j) in lastMoveDashes {
+                    if ( (i+j) % 2 == 0 ) {
+                        //right
+                        buttons[i][j].setImage(UIImage(named: "dash_right_black.png"), for: .normal)
+                    } else {
+                        buttons[i][j].setImage(UIImage(named: "dash_left_black.png"), for: .normal)
+                    }
                 }
-            }
-            for i in lastMoveFiledsIndexes {
-                lastMoveFields[i-1].setImage(UIImage(named: "cross_black.png"), for: .normal)
+                for i in lastMoveFiledsIndexes {
+                    lastMoveFields[i-1].setImage(UIImage(named: "cross_black.png"), for: .normal)
+                }
             }
 
         } else if ( didWon == "-1" ) {
 
             self.view.backgroundColor = UIColor.red
 
-            for (i,j) in lastMoveDashes {
-                if ( (i+j) % 2 == 0 ) {
-                    //right
-                    buttons[i][j].setImage(UIImage(named: "dash_right_black.png"), for: .normal)
-                } else {
-                    buttons[i][j].setImage(UIImage(named: "dash_left_black.png"), for: .normal)
+            if ( !didLastMoveWasUsers) {
+                for (i,j) in lastMoveDashes {
+                    if ( (i+j) % 2 == 0 ) {
+                        //right
+                        buttons[i][j].setImage(UIImage(named: "dash_right_black.png"), for: .normal)
+                    } else {
+                        buttons[i][j].setImage(UIImage(named: "dash_left_black.png"), for: .normal)
+                    }
                 }
-            }
-            for i in lastMoveFiledsIndexes {
-                lastMoveFields[i-1].setImage(UIImage(named: "circle_black.png"), for: .normal)
+                for i in lastMoveFiledsIndexes {
+                    lastMoveFields[i-1].setImage(UIImage(named: "circle_black.png"), for: .normal)
+                }
             }
         }
     }
@@ -387,7 +391,7 @@ class GameViewController: UIViewController {
                         lastMoveFiledsIndexes.append(lastMoveFields.count)
                         
                     default:
-                        print(situation)
+                        print("situation: "+iRespond!)
                     }
                     k+=1
                 }

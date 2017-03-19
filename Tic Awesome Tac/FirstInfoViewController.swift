@@ -20,14 +20,65 @@ class FirstInfoViewController: UIViewController {
         return true
     }
 
+    public var tutorial: UIImage? = nil
+    public weak var sub: UIViewController? = nil
+
+    private var tutorialView: UIImageView? = nil
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let tutorial = UIImage.gifImageWithName(name: "tutorial")
-        let imageView = UIImageView(image: tutorial)
-        imageView.frame = CGRect(x: 20.0, y: 50.0, width: self.view.frame.size.width - 40, height: self.view.frame.size.width - 40)
-        view.addSubview(imageView)
+        if ( tutorial == nil) {
+
+            let loading = UILabel(frame: CGRect(x: 20.0, y: 50.0, width: self.view.frame.size.width - 40, height: self.view.frame.size.width - 40))
+            loading.text = "Making tutorial..."
+            loading.textColor = UIColor.black
+            loading.backgroundColor = UIColor.cyan
+            view.addSubview(loading)
+
+            DispatchQueue.global(qos: .background).async { [weak self]
+                () -> Void in
+                self?.tutorial = UIImage.gifImageWithName(name: "tutorial")
+
+
+                DispatchQueue.main.async {
+                    () -> Void in
+                    let imageView = UIImageView(image: self?.tutorial)
+                    imageView.frame = CGRect(x: 20.0, y: 50.0, width: (self?.view.frame.size.width)! - 40, height: (self?.view.frame.size.width)! - 40)
+                    self?.view.willRemoveSubview(loading)
+                    self?.view.addSubview(imageView)
+                    if let view = self?.sub as? MenuViewController {
+                        view.tutorial = self?.tutorial
+                    }
+
+                }
+
+
+                
+            }
+/*
+            // Move to a background thread to do some long running work
+            DispatchQueue.global(qos: .utility).async {
+                let img = UIImage.gifImageWithName(name: "tutorial")
+
+                // Bounce back to the main thread to update the UI
+                DispatchQueue.main.async {
+                    let imageView = UIImageView(image: img)
+                    imageView.frame = CGRect(x: 20.0, y: 50.0, width: self.view.frame.size.width - 40, height: self.view.frame.size.width - 40)
+                    self.view.willRemoveSubview(loading)
+                    self.view.addSubview(imageView)
+                    self.tutorial = img
+                    if let view = self.sub as? MenuViewController {
+                        view.tutorial = img
+                    }
+                }
+            }
+        */
+        } else {
+            let imageView = UIImageView(image: tutorial)
+            imageView.frame = CGRect(x: 20.0, y: 50.0, width: self.view.frame.size.width - 40, height: self.view.frame.size.width - 40)
+            view.addSubview(imageView)
+        }
 
     }
 

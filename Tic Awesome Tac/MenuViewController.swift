@@ -10,15 +10,18 @@ import UIKit
 
 class MenuViewController: UIViewController {
 
+    public var tutorial: UIImage? = nil
+
     override func viewDidLoad() {
         super.viewDidLoad()
+
         let value = UIInterfaceOrientation.landscapeLeft.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
 
         // Do any additional setup after loading the view.
     }
     override var prefersStatusBarHidden : Bool {
-        return true
+      return true
     }
 
     private func supportedInterfaceOrientations() -> UIInterfaceOrientationMask {
@@ -54,9 +57,12 @@ class MenuViewController: UIViewController {
                 destinationVC.n = 12
             }
         default:
-//            if let destinationVC = segue.destination as? GameViewController {
-//                destinationVC.n = 0
-//            }
+            if let destinationVC = segue.destination as? FirstInfoViewController {
+                if tutorial != nil {
+                    destinationVC.tutorial = tutorial
+                }
+                destinationVC.sub = self
+            }
             break
         }
     }
