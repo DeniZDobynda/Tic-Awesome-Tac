@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="zsH-Gj-Aes">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="17A358a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1ud-PF-64M">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -45,7 +45,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Zdm-mH-hJG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="524.63768115942037" y="-287.77173913043481"/>
+            <point key="canvasLocation" x="1430" y="-275"/>
         </scene>
         <!--Game View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -64,12 +64,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="524.63768115942037" y="486.68478260869568"/>
+            <point key="canvasLocation" x="1431.8840579710145" y="486.68478260869568"/>
         </scene>
         <!--Menu View Controller-->
         <scene sceneID="dJk-To-2ix">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="zsH-Gj-Aes" customClass="MenuViewController" customModule="Tic_Awesome_Tac" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="zsH-Gj-Aes" customClass="MenuViewController" customModule="Tic_Awesome_Tac" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="n1v-od-UVj"/>
                         <viewControllerLayoutGuide type="bottom" id="caV-gd-yKa"/>
@@ -79,38 +79,38 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="chH-7A-w9X">
-                                <rect key="frame" x="30" y="28" width="354" height="700"/>
+                                <rect key="frame" x="30" y="72" width="354" height="656"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5uZ-4r-RIZ">
-                                        <rect key="frame" x="0.0" y="0.0" width="354" height="136"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="354" height="127.33333333333334"/>
                                         <state key="normal" image="title.png"/>
                                         <connections>
                                             <segue destination="sbK-bM-OZ0" kind="presentation" identifier="Info" id="KWF-ZB-qpN"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xhh-96-avc">
-                                        <rect key="frame" x="0.0" y="141" width="354" height="136"/>
+                                        <rect key="frame" x="0.0" y="132.33333333333331" width="354" height="126.99999999999994"/>
                                         <state key="normal" image="3x3.png"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="Show 3" id="VuI-WJ-1i1"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="M44-93-TyG">
-                                        <rect key="frame" x="0.0" y="282" width="354" height="136"/>
+                                        <rect key="frame" x="0.0" y="264.33333333333331" width="354" height="127.33333333333337"/>
                                         <state key="normal" image="6x6.png"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="Show 6" id="jmV-LR-DGb"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9v0-0f-4qu">
-                                        <rect key="frame" x="0.0" y="423" width="354" height="136"/>
+                                        <rect key="frame" x="0.0" y="396.66666666666663" width="354" height="126.99999999999989"/>
                                         <state key="normal" image="9x9.png"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="Show 9" id="gz2-CZ-Q3K"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6RY-8M-ipa">
-                                        <rect key="frame" x="0.0" y="564" width="354" height="136"/>
+                                        <rect key="frame" x="0.0" y="528.66666666666652" width="354" height="127.33333333333337"/>
                                         <state key="normal" image="12x12.png"/>
                                         <connections>
                                             <segue destination="BYZ-38-t0r" kind="show" identifier="Show 12" id="K8d-w4-0Ye"/>
@@ -132,7 +132,25 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7On-SL-g57" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-657" y="487"/>
+            <point key="canvasLocation" x="249.27536231884059" y="486.68478260869568"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Q2u-b8-Msw">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="1ud-PF-64M" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="9gm-hD-8J9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="zsH-Gj-Aes" kind="relationship" relationship="rootViewController" id="XJ8-Ug-4QG"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZeZ-OY-zuv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-657.97101449275362" y="486.68478260869568"/>
         </scene>
     </scenes>
     <resources>

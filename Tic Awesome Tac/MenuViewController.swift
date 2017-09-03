@@ -25,6 +25,11 @@ class MenuViewController: UIViewController, UISplitViewControllerDelegate {
 
     public var tutorial: UIImage? = nil
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -56,18 +61,22 @@ class MenuViewController: UIViewController, UISplitViewControllerDelegate {
         case "Show 3":
             if let destinationVC = segue.destination as? GameViewController {
                 destinationVC.n = 3
+                destinationVC.title = "3 x 3"
             }
         case "Show 6":
             if let destinationVC = segue.destination as? GameViewController {
                 destinationVC.n = 6
+                destinationVC.title = "6 X 6"
             }
         case "Show 9":
             if let destinationVC = segue.destination as? GameViewController {
                 destinationVC.n = 9
+                destinationVC.title = "9 x 9"
             }
         case "Show 12":
             if let destinationVC = segue.destination as? GameViewController {
                 destinationVC.n = 12
+                destinationVC.title = "12 x 12"
             }
         default:
             if let destinationVC = segue.destination.contents as? ImageViewController {

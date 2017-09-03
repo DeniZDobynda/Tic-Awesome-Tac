@@ -8,32 +8,32 @@
 
 import UIKit
 
-extension UIView {
+//extension UIView {
+//
+//    var identifier: GameViewController {
+//        get {
+//            return getAssociatedValue(key: "identifier", object: self, initialValue: GameViewController())
+//        }
+//        set {
+//            set(associatedValue: newValue, key: "identifier", object: self)
+//        }
+//    }
+//}
 
-    var identifier: GameViewController {
-        get {
-            return getAssociatedValue(key: "identifier", object: self, initialValue: GameViewController())
-        }
-        set {
-            set(associatedValue: newValue, key: "identifier", object: self)
-        }
-    }
-}
+//extension UIView {
+//
+//    func changeScale(recognizer: UIPinchGestureRecognizer) {
+//        switch recognizer.state {
+//        case .changed, .ended:
+//            identifier.scale *= recognizer.scale
+//            recognizer.scale = 1.0
+//        default:
+//            break
+//        }
+//    }
+//}
 
-extension UIView {
-
-    func changeScale(recognizer: UIPinchGestureRecognizer) {
-        switch recognizer.state {
-        case .changed, .ended:
-            identifier.scale *= recognizer.scale
-            recognizer.scale = 1.0
-        default:
-            break
-        }
-    }
-}
-
-class GameViewController: UIViewController {
+class GameViewController: UIViewController, UIScrollViewDelegate {
 
     public var scale: CGFloat = 1.0 {
         didSet {
@@ -62,24 +62,31 @@ class GameViewController: UIViewController {
     private var moveFields = [UIButton]()
 
     private var didLastMoveWasUsers: Bool = true
-    private var gameView = UIView() {
-        didSet {
-            view.identifier = self
-            view.addGestureRecognizer(
-                UIPinchGestureRecognizer(target: view, action: #selector( UIView.changeScale(recognizer:) ) )
-            )
-        }
+    private var gameScrollView = UIScrollView()
+    private var gameView = UIView()
+//    {
+//        didSet {
+//            view.identifier = self
+//            view.addGestureRecognizer(
+//                UIPinchGestureRecognizer(target: view, action: #selector( UIView.changeScale(recognizer:) ) )
+//            )
+//        }
+//    }
+
+
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return gameView
     }
 
-    func changeScale(recognizer: UIPinchGestureRecognizer) {
-        switch recognizer.state {
-        case .changed, .ended:
-            scale *= recognizer.scale
-            recognizer.scale = 1.0
-        default:
-            break
-        }
-    }
+//    func changeScale(recognizer: UIPinchGestureRecognizer) {
+//        switch recognizer.state {
+//        case .changed, .ended:
+//            gameView.zoomScale *= recognizer.scale
+//            recognizer.scale = 1.0
+//        default:
+//            break
+//        }
+//    }
 
     private var moveAI: Bool = false {
         willSet {
@@ -103,7 +110,15 @@ class GameViewController: UIViewController {
     private func shouldAutorotate() -> Bool {return true}
 
     override var prefersStatusBarHidden : Bool {return true}
-    
+
+    private let defaultWallSize: CGSize = CGSize(width: 100, height: 100)
+
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
+    }
+
     override func viewDidLoad() {
         game = Game(n!)
         lastMoveDashes = [(Int, Int)]()
@@ -113,24 +128,27 @@ class GameViewController: UIViewController {
         moveFields = [UIButton]()
         didLastMoveWasUsers = true
 
-        let b = min(view.bounds.maxX, view.bounds.maxY)
 
 
+//        gameView = UIScrollView(frame: CGRect(x: (view.bounds.maxX - triangleSide)/2 , y: (view.bounds.maxY - triangleSide)/2, width: triangleSide, height: triangleSide))
 
-        let triangleSide = sqrt((b*b)/2) * scale
-
-        gameView = UIView(frame: CGRect(x: (view.bounds.maxX - triangleSide)/2 , y: (view.bounds.maxY - triangleSide)/2, width: triangleSide, height: triangleSide))
-
-
-        gameView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI/4))
-//        gameView.transform = CGAffineTransform.identity
-        gameView.backgroundColor = UIColor.white
-        self.view.addSubview(gameView)
 
         let size = n! * 2
 
 
-        let measure = Int(triangleSide) / size
+        let content = CGSize(width: CGFloat(size) * defaultWallSize.width, height: CGFloat(size) * defaultWallSize.height)
+
+        gameView = UIView(frame: CGRect(origin: CGPoint(x:0, y:0), size: content))
+
+
+
+//        gameView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI/4))
+//        gameView.transform = CGAffineTransform.identity
+        gameView.backgroundColor = UIColor.white
+//        self.view.addSubview(gameView)
+
+
+        let measure: Int = Int(defaultWallSize.width) //Int(triangleSide) / size
 
         let x = 0//Int(gameView.bounds.midX) - measure*n!
         let y = 0//Int(gameView.bounds.midY) - measure*n!
@@ -175,12 +193,6 @@ class GameViewController: UIViewController {
             }
         }
 
-        let height = view.bounds.maxY/2 - triangleSide/2
-        exit = UIButton(frame: CGRect(x: 10, y: 10, width: height, height: height))
-        exit.setImage(UIImage(named: "home.jpg"), for: .normal)
-        exit.addTarget(self, action: #selector(close(button:)), for: .touchUpInside)
-
-        self.view.addSubview(exit)
 
         reDraw()
 
@@ -188,23 +200,22 @@ class GameViewController: UIViewController {
     }
 
     private func reDraw() {
-        gameView.removeFromSuperview()
+//        gameView.removeFromSuperview()
 
-        let b = min(view.bounds.maxX, view.bounds.maxY)
+//        let b = min(view.bounds.maxX, view.bounds.maxY)
 
-        let triangleSide = sqrt((b*b)/2) * scale
+//        let triangleSide = sqrt((b*b)/2) * scale
 
-        gameView = UIView(frame: CGRect(x: (view.bounds.maxX - triangleSide)/2 , y: (view.bounds.maxY - triangleSide)/2, width: triangleSide, height: triangleSide))
+//        gameView = UIScrollView(frame: CGRect(x: (view.bounds.maxX - triangleSide)/2 , y: (view.bounds.maxY - triangleSide)/2, width: triangleSide, height: triangleSide))
+//        gameView = UIScrollView(frame: view.bounds )
 
-        gameView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI/4))
+//        gameView.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI/4))
         //gameView.backgroundColor = UIColor.gray
 
-        self.view.addSubview(gameView)
 
         let size = n! * 2
 
-
-        let measure = Int(triangleSide) / size
+        let measure: Int = Int(defaultWallSize.width)
 
         let x = 0//Int(gameView.bounds.midX) - measure*n!
         let y = 0//Int(gameView.bounds.midY) - measure*n!
@@ -304,12 +315,43 @@ class GameViewController: UIViewController {
             }
         }
 
+
+        //adding ability to magnify
+
+//        gameView.scrollRectToVisible(CGRect(origin: CGPoint(x: 0, y: 0), size: content), animated: false)
+
+
+
+
+
+        let visibleView = CGRect(
+            origin: CGPoint(x: 0.0, y: navigationController?.navigationBar.bounds.height ?? 0.0),
+            size: CGSize(width: view.bounds.size.width, height: view.bounds.size.height - (navigationController?.navigationBar.bounds.height ?? 0.0) )
+        )
+
+
+        let content = CGSize(
+            width: max(CGFloat(size) * defaultWallSize.width, visibleView.width),
+            height: max(CGFloat(size) * defaultWallSize.height, visibleView.height)
+        )
+
+
+        gameScrollView = UIScrollView(frame: visibleView)
+
+        gameScrollView.contentSize = content
+
+        gameScrollView.delegate = self
+        gameScrollView.minimumZoomScale = gameScrollView.bounds.width / gameScrollView.contentSize.width
+        gameScrollView.maximumZoomScale = 1.0
+        gameScrollView.zoomScale = gameScrollView.minimumZoomScale
+        //print(gameView.maximumZoomScale, gameView.minimumZoomScale)
+
+        gameScrollView.addSubview(gameView)
+
+        self.view.addSubview(gameScrollView)
+
     }
 
-    func close(button: UIButton) {
-        //self.navigationController!.popViewController(animated: true)
-        dismiss(animated: true, completion: nil)
-    }
 
     func winner(button: UIButton) {
         gameView.subviews.forEach({ $0.removeFromSuperview() })
@@ -317,6 +359,8 @@ class GameViewController: UIViewController {
         game = Game(n!)
         winner = UIButton()
         didWon = "0"
+        self.view.backgroundColor = UIColor.white
+        gameView.backgroundColor = UIColor.white
         self.viewDidLoad()
     }
 
@@ -385,11 +429,11 @@ class GameViewController: UIViewController {
 
                 var k = 0
                 while ( k < string.count - 1 ) {
-                    let size = n! * 2
+//                    let size = n! * 2
 
-                    let b = min(gameView.bounds.maxX, gameView.bounds.maxY)
+//                    let b = min(gameView.bounds.maxX, gameView.bounds.maxY)
 
-                    let measure = Int(b) / size
+                    let measure: Int = Int(defaultWallSize.width) //let measure = Int(b) / size
 
                     let x = 0//Int(gameView.bounds.midX) - measure*n!
                     let y = 0//Int(gameView.bounds.midY) - measure*n!
@@ -578,11 +622,11 @@ class GameViewController: UIViewController {
 
                 var k = 0
                 while ( k < string.count && string[k] != "" ) {
-                    let size = n! * 2
+//                    let size = n! * 2
 
-                    let b = gameView.bounds.maxX > gameView.bounds.maxY ? gameView.bounds.maxY : gameView.bounds.maxX
+//                    let b = gameView.bounds.maxX > gameView.bounds.maxY ? gameView.bounds.maxY : gameView.bounds.maxX
 
-                    let measure = Int(b) / size
+                    let measure: Int = Int(defaultWallSize.width) //let measure = Int(b) / size
 
                     let x = 0//Int(gameView.bounds.midX) - measure*n!
                     let y = 0//Int(gameView.bounds.midY) - measure*n!
@@ -651,4 +695,3 @@ class GameViewController: UIViewController {
     }
     
 }
-
